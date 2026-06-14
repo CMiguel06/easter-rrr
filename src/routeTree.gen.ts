@@ -15,13 +15,26 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
+import { Route as ToolsSecretNoteRouteImport } from './routes/tools.secret-note'
+import { Route as ToolsQrTrailRouteImport } from './routes/tools.qr-trail'
 import { Route as ToolsQrSecretRouteImport } from './routes/tools.qr-secret'
+import { Route as ToolsNthLetterRouteImport } from './routes/tools.nth-letter'
 import { Route as ToolsMetadataRouteImport } from './routes/tools.metadata'
+import { Route as ToolsKonamiRouteImport } from './routes/tools.konami'
 import { Route as ToolsInvisibleTextRouteImport } from './routes/tools.invisible-text'
+import { Route as ToolsImageWatermarkRouteImport } from './routes/tools.image-watermark'
 import { Route as ToolsImageSecretRouteImport } from './routes/tools.image-secret'
+import { Route as ToolsHtmlCommentRouteImport } from './routes/tools.html-comment'
+import { Route as ToolsHmacRouteImport } from './routes/tools.hmac'
 import { Route as ToolsHashRouteImport } from './routes/tools.hash'
+import { Route as ToolsFinalDoorRouteImport } from './routes/tools.final-door'
+import { Route as ToolsFileChecksumRouteImport } from './routes/tools.file-checksum'
+import { Route as ToolsEncryptRouteImport } from './routes/tools.encrypt'
 import { Route as ToolsEncoderRouteImport } from './routes/tools.encoder'
+import { Route as ToolsCssHiddenTextRouteImport } from './routes/tools.css-hidden-text'
+import { Route as ToolsConsoleMessageRouteImport } from './routes/tools.console-message'
 import { Route as ToolsChallengeRouteImport } from './routes/tools.challenge'
+import { Route as ToolsAcrosticRouteImport } from './routes/tools.acrostic'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -53,9 +66,24 @@ const ToolsIndexRoute = ToolsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsSecretNoteRoute = ToolsSecretNoteRouteImport.update({
+  id: '/secret-note',
+  path: '/secret-note',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsQrTrailRoute = ToolsQrTrailRouteImport.update({
+  id: '/qr-trail',
+  path: '/qr-trail',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsQrSecretRoute = ToolsQrSecretRouteImport.update({
   id: '/qr-secret',
   path: '/qr-secret',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsNthLetterRoute = ToolsNthLetterRouteImport.update({
+  id: '/nth-letter',
+  path: '/nth-letter',
   getParentRoute: () => ToolsRoute,
 } as any)
 const ToolsMetadataRoute = ToolsMetadataRouteImport.update({
@@ -63,9 +91,19 @@ const ToolsMetadataRoute = ToolsMetadataRouteImport.update({
   path: '/metadata',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsKonamiRoute = ToolsKonamiRouteImport.update({
+  id: '/konami',
+  path: '/konami',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsInvisibleTextRoute = ToolsInvisibleTextRouteImport.update({
   id: '/invisible-text',
   path: '/invisible-text',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsImageWatermarkRoute = ToolsImageWatermarkRouteImport.update({
+  id: '/image-watermark',
+  path: '/image-watermark',
   getParentRoute: () => ToolsRoute,
 } as any)
 const ToolsImageSecretRoute = ToolsImageSecretRouteImport.update({
@@ -73,9 +111,34 @@ const ToolsImageSecretRoute = ToolsImageSecretRouteImport.update({
   path: '/image-secret',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsHtmlCommentRoute = ToolsHtmlCommentRouteImport.update({
+  id: '/html-comment',
+  path: '/html-comment',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsHmacRoute = ToolsHmacRouteImport.update({
+  id: '/hmac',
+  path: '/hmac',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsHashRoute = ToolsHashRouteImport.update({
   id: '/hash',
   path: '/hash',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsFinalDoorRoute = ToolsFinalDoorRouteImport.update({
+  id: '/final-door',
+  path: '/final-door',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsFileChecksumRoute = ToolsFileChecksumRouteImport.update({
+  id: '/file-checksum',
+  path: '/file-checksum',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsEncryptRoute = ToolsEncryptRouteImport.update({
+  id: '/encrypt',
+  path: '/encrypt',
   getParentRoute: () => ToolsRoute,
 } as any)
 const ToolsEncoderRoute = ToolsEncoderRouteImport.update({
@@ -83,9 +146,24 @@ const ToolsEncoderRoute = ToolsEncoderRouteImport.update({
   path: '/encoder',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsCssHiddenTextRoute = ToolsCssHiddenTextRouteImport.update({
+  id: '/css-hidden-text',
+  path: '/css-hidden-text',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsConsoleMessageRoute = ToolsConsoleMessageRouteImport.update({
+  id: '/console-message',
+  path: '/console-message',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsChallengeRoute = ToolsChallengeRouteImport.update({
   id: '/challenge',
   path: '/challenge',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsAcrosticRoute = ToolsAcrosticRouteImport.update({
+  id: '/acrostic',
+  path: '/acrostic',
   getParentRoute: () => ToolsRoute,
 } as any)
 
@@ -95,13 +173,26 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/puzzles': typeof PuzzlesRoute
   '/tools': typeof ToolsRouteWithChildren
+  '/tools/acrostic': typeof ToolsAcrosticRoute
   '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/console-message': typeof ToolsConsoleMessageRoute
+  '/tools/css-hidden-text': typeof ToolsCssHiddenTextRoute
   '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/encrypt': typeof ToolsEncryptRoute
+  '/tools/file-checksum': typeof ToolsFileChecksumRoute
+  '/tools/final-door': typeof ToolsFinalDoorRoute
   '/tools/hash': typeof ToolsHashRoute
+  '/tools/hmac': typeof ToolsHmacRoute
+  '/tools/html-comment': typeof ToolsHtmlCommentRoute
   '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/image-watermark': typeof ToolsImageWatermarkRoute
   '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/konami': typeof ToolsKonamiRoute
   '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/nth-letter': typeof ToolsNthLetterRoute
   '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/qr-trail': typeof ToolsQrTrailRoute
+  '/tools/secret-note': typeof ToolsSecretNoteRoute
   '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -109,13 +200,26 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/privacy': typeof PrivacyRoute
   '/puzzles': typeof PuzzlesRoute
+  '/tools/acrostic': typeof ToolsAcrosticRoute
   '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/console-message': typeof ToolsConsoleMessageRoute
+  '/tools/css-hidden-text': typeof ToolsCssHiddenTextRoute
   '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/encrypt': typeof ToolsEncryptRoute
+  '/tools/file-checksum': typeof ToolsFileChecksumRoute
+  '/tools/final-door': typeof ToolsFinalDoorRoute
   '/tools/hash': typeof ToolsHashRoute
+  '/tools/hmac': typeof ToolsHmacRoute
+  '/tools/html-comment': typeof ToolsHtmlCommentRoute
   '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/image-watermark': typeof ToolsImageWatermarkRoute
   '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/konami': typeof ToolsKonamiRoute
   '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/nth-letter': typeof ToolsNthLetterRoute
   '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/qr-trail': typeof ToolsQrTrailRoute
+  '/tools/secret-note': typeof ToolsSecretNoteRoute
   '/tools': typeof ToolsIndexRoute
 }
 export interface FileRoutesById {
@@ -125,13 +229,26 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/puzzles': typeof PuzzlesRoute
   '/tools': typeof ToolsRouteWithChildren
+  '/tools/acrostic': typeof ToolsAcrosticRoute
   '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/console-message': typeof ToolsConsoleMessageRoute
+  '/tools/css-hidden-text': typeof ToolsCssHiddenTextRoute
   '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/encrypt': typeof ToolsEncryptRoute
+  '/tools/file-checksum': typeof ToolsFileChecksumRoute
+  '/tools/final-door': typeof ToolsFinalDoorRoute
   '/tools/hash': typeof ToolsHashRoute
+  '/tools/hmac': typeof ToolsHmacRoute
+  '/tools/html-comment': typeof ToolsHtmlCommentRoute
   '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/image-watermark': typeof ToolsImageWatermarkRoute
   '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/konami': typeof ToolsKonamiRoute
   '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/nth-letter': typeof ToolsNthLetterRoute
   '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/qr-trail': typeof ToolsQrTrailRoute
+  '/tools/secret-note': typeof ToolsSecretNoteRoute
   '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRouteTypes {
@@ -142,13 +259,26 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/puzzles'
     | '/tools'
+    | '/tools/acrostic'
     | '/tools/challenge'
+    | '/tools/console-message'
+    | '/tools/css-hidden-text'
     | '/tools/encoder'
+    | '/tools/encrypt'
+    | '/tools/file-checksum'
+    | '/tools/final-door'
     | '/tools/hash'
+    | '/tools/hmac'
+    | '/tools/html-comment'
     | '/tools/image-secret'
+    | '/tools/image-watermark'
     | '/tools/invisible-text'
+    | '/tools/konami'
     | '/tools/metadata'
+    | '/tools/nth-letter'
     | '/tools/qr-secret'
+    | '/tools/qr-trail'
+    | '/tools/secret-note'
     | '/tools/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -156,13 +286,26 @@ export interface FileRouteTypes {
     | '/about'
     | '/privacy'
     | '/puzzles'
+    | '/tools/acrostic'
     | '/tools/challenge'
+    | '/tools/console-message'
+    | '/tools/css-hidden-text'
     | '/tools/encoder'
+    | '/tools/encrypt'
+    | '/tools/file-checksum'
+    | '/tools/final-door'
     | '/tools/hash'
+    | '/tools/hmac'
+    | '/tools/html-comment'
     | '/tools/image-secret'
+    | '/tools/image-watermark'
     | '/tools/invisible-text'
+    | '/tools/konami'
     | '/tools/metadata'
+    | '/tools/nth-letter'
     | '/tools/qr-secret'
+    | '/tools/qr-trail'
+    | '/tools/secret-note'
     | '/tools'
   id:
     | '__root__'
@@ -171,13 +314,26 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/puzzles'
     | '/tools'
+    | '/tools/acrostic'
     | '/tools/challenge'
+    | '/tools/console-message'
+    | '/tools/css-hidden-text'
     | '/tools/encoder'
+    | '/tools/encrypt'
+    | '/tools/file-checksum'
+    | '/tools/final-door'
     | '/tools/hash'
+    | '/tools/hmac'
+    | '/tools/html-comment'
     | '/tools/image-secret'
+    | '/tools/image-watermark'
     | '/tools/invisible-text'
+    | '/tools/konami'
     | '/tools/metadata'
+    | '/tools/nth-letter'
     | '/tools/qr-secret'
+    | '/tools/qr-trail'
+    | '/tools/secret-note'
     | '/tools/'
   fileRoutesById: FileRoutesById
 }
@@ -233,11 +389,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsIndexRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/secret-note': {
+      id: '/tools/secret-note'
+      path: '/secret-note'
+      fullPath: '/tools/secret-note'
+      preLoaderRoute: typeof ToolsSecretNoteRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/qr-trail': {
+      id: '/tools/qr-trail'
+      path: '/qr-trail'
+      fullPath: '/tools/qr-trail'
+      preLoaderRoute: typeof ToolsQrTrailRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/qr-secret': {
       id: '/tools/qr-secret'
       path: '/qr-secret'
       fullPath: '/tools/qr-secret'
       preLoaderRoute: typeof ToolsQrSecretRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/nth-letter': {
+      id: '/tools/nth-letter'
+      path: '/nth-letter'
+      fullPath: '/tools/nth-letter'
+      preLoaderRoute: typeof ToolsNthLetterRouteImport
       parentRoute: typeof ToolsRoute
     }
     '/tools/metadata': {
@@ -247,11 +424,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsMetadataRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/konami': {
+      id: '/tools/konami'
+      path: '/konami'
+      fullPath: '/tools/konami'
+      preLoaderRoute: typeof ToolsKonamiRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/invisible-text': {
       id: '/tools/invisible-text'
       path: '/invisible-text'
       fullPath: '/tools/invisible-text'
       preLoaderRoute: typeof ToolsInvisibleTextRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/image-watermark': {
+      id: '/tools/image-watermark'
+      path: '/image-watermark'
+      fullPath: '/tools/image-watermark'
+      preLoaderRoute: typeof ToolsImageWatermarkRouteImport
       parentRoute: typeof ToolsRoute
     }
     '/tools/image-secret': {
@@ -261,11 +452,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsImageSecretRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/html-comment': {
+      id: '/tools/html-comment'
+      path: '/html-comment'
+      fullPath: '/tools/html-comment'
+      preLoaderRoute: typeof ToolsHtmlCommentRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/hmac': {
+      id: '/tools/hmac'
+      path: '/hmac'
+      fullPath: '/tools/hmac'
+      preLoaderRoute: typeof ToolsHmacRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/hash': {
       id: '/tools/hash'
       path: '/hash'
       fullPath: '/tools/hash'
       preLoaderRoute: typeof ToolsHashRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/final-door': {
+      id: '/tools/final-door'
+      path: '/final-door'
+      fullPath: '/tools/final-door'
+      preLoaderRoute: typeof ToolsFinalDoorRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/file-checksum': {
+      id: '/tools/file-checksum'
+      path: '/file-checksum'
+      fullPath: '/tools/file-checksum'
+      preLoaderRoute: typeof ToolsFileChecksumRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/encrypt': {
+      id: '/tools/encrypt'
+      path: '/encrypt'
+      fullPath: '/tools/encrypt'
+      preLoaderRoute: typeof ToolsEncryptRouteImport
       parentRoute: typeof ToolsRoute
     }
     '/tools/encoder': {
@@ -275,6 +501,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsEncoderRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/css-hidden-text': {
+      id: '/tools/css-hidden-text'
+      path: '/css-hidden-text'
+      fullPath: '/tools/css-hidden-text'
+      preLoaderRoute: typeof ToolsCssHiddenTextRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/console-message': {
+      id: '/tools/console-message'
+      path: '/console-message'
+      fullPath: '/tools/console-message'
+      preLoaderRoute: typeof ToolsConsoleMessageRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/challenge': {
       id: '/tools/challenge'
       path: '/challenge'
@@ -282,28 +522,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsChallengeRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/acrostic': {
+      id: '/tools/acrostic'
+      path: '/acrostic'
+      fullPath: '/tools/acrostic'
+      preLoaderRoute: typeof ToolsAcrosticRouteImport
+      parentRoute: typeof ToolsRoute
+    }
   }
 }
 
 interface ToolsRouteChildren {
+  ToolsAcrosticRoute: typeof ToolsAcrosticRoute
   ToolsChallengeRoute: typeof ToolsChallengeRoute
+  ToolsConsoleMessageRoute: typeof ToolsConsoleMessageRoute
+  ToolsCssHiddenTextRoute: typeof ToolsCssHiddenTextRoute
   ToolsEncoderRoute: typeof ToolsEncoderRoute
+  ToolsEncryptRoute: typeof ToolsEncryptRoute
+  ToolsFileChecksumRoute: typeof ToolsFileChecksumRoute
+  ToolsFinalDoorRoute: typeof ToolsFinalDoorRoute
   ToolsHashRoute: typeof ToolsHashRoute
+  ToolsHmacRoute: typeof ToolsHmacRoute
+  ToolsHtmlCommentRoute: typeof ToolsHtmlCommentRoute
   ToolsImageSecretRoute: typeof ToolsImageSecretRoute
+  ToolsImageWatermarkRoute: typeof ToolsImageWatermarkRoute
   ToolsInvisibleTextRoute: typeof ToolsInvisibleTextRoute
+  ToolsKonamiRoute: typeof ToolsKonamiRoute
   ToolsMetadataRoute: typeof ToolsMetadataRoute
+  ToolsNthLetterRoute: typeof ToolsNthLetterRoute
   ToolsQrSecretRoute: typeof ToolsQrSecretRoute
+  ToolsQrTrailRoute: typeof ToolsQrTrailRoute
+  ToolsSecretNoteRoute: typeof ToolsSecretNoteRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
 const ToolsRouteChildren: ToolsRouteChildren = {
+  ToolsAcrosticRoute: ToolsAcrosticRoute,
   ToolsChallengeRoute: ToolsChallengeRoute,
+  ToolsConsoleMessageRoute: ToolsConsoleMessageRoute,
+  ToolsCssHiddenTextRoute: ToolsCssHiddenTextRoute,
   ToolsEncoderRoute: ToolsEncoderRoute,
+  ToolsEncryptRoute: ToolsEncryptRoute,
+  ToolsFileChecksumRoute: ToolsFileChecksumRoute,
+  ToolsFinalDoorRoute: ToolsFinalDoorRoute,
   ToolsHashRoute: ToolsHashRoute,
+  ToolsHmacRoute: ToolsHmacRoute,
+  ToolsHtmlCommentRoute: ToolsHtmlCommentRoute,
   ToolsImageSecretRoute: ToolsImageSecretRoute,
+  ToolsImageWatermarkRoute: ToolsImageWatermarkRoute,
   ToolsInvisibleTextRoute: ToolsInvisibleTextRoute,
+  ToolsKonamiRoute: ToolsKonamiRoute,
   ToolsMetadataRoute: ToolsMetadataRoute,
+  ToolsNthLetterRoute: ToolsNthLetterRoute,
   ToolsQrSecretRoute: ToolsQrSecretRoute,
+  ToolsQrTrailRoute: ToolsQrTrailRoute,
+  ToolsSecretNoteRoute: ToolsSecretNoteRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
 

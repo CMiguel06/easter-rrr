@@ -5,7 +5,13 @@ import { GlassCard } from "@/components/ui-custom/GlassCard";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { hashText, type HashAlgo } from "@/lib/hashing";
 import { CopyButton } from "@/components/ui-custom/CopyButton";
@@ -15,9 +21,17 @@ export const Route = createFileRoute("/tools/hash")({
   head: () => ({
     meta: [
       { title: "Generate a phrase hash — Easter" },
-      { name: "description", content: "Turn any phrase into a cryptographic fingerprint using SHA-256, SHA-384 or SHA-512." },
+      {
+        name: "description",
+        content:
+          "Turn any phrase into a cryptographic fingerprint using SHA-256, SHA-384 or SHA-512.",
+      },
       { property: "og:title", content: "Generate a phrase hash — Easter" },
-      { property: "og:description", content: "Hash phrases with SHA-256/384/512 in your browser. Compare against an expected hash." },
+      {
+        property: "og:description",
+        content:
+          "Hash phrases with SHA-256/384/512 in your browser. Compare against an expected hash.",
+      },
     ],
   }),
   component: HashPage,
@@ -35,11 +49,19 @@ function HashPage() {
       />
       <Tabs defaultValue="generate">
         <TabsList className="glass-panel mb-6 grid w-full grid-cols-2 rounded-xl p-1">
-          <TabsTrigger value="generate" className="rounded-lg">Generate</TabsTrigger>
-          <TabsTrigger value="compare" className="rounded-lg">Compare</TabsTrigger>
+          <TabsTrigger value="generate" className="rounded-lg">
+            Generate
+          </TabsTrigger>
+          <TabsTrigger value="compare" className="rounded-lg">
+            Compare
+          </TabsTrigger>
         </TabsList>
-        <TabsContent value="generate"><Generate /></TabsContent>
-        <TabsContent value="compare"><Compare /></TabsContent>
+        <TabsContent value="generate">
+          <Generate />
+        </TabsContent>
+        <TabsContent value="compare">
+          <Compare />
+        </TabsContent>
       </Tabs>
     </div>
   );
@@ -62,9 +84,16 @@ function Generate() {
 
   useEffect(() => {
     let cancelled = false;
-    if (!text) { setHash(""); return; }
-    hashText(text, algo).then((h) => { if (!cancelled) setHash(h); });
-    return () => { cancelled = true; };
+    if (!text) {
+      setHash("");
+      return;
+    }
+    hashText(text, algo).then((h) => {
+      if (!cancelled) setHash(h);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [text, algo]);
 
   return (
@@ -82,9 +111,15 @@ function Generate() {
       <div className="space-y-2">
         <label className="text-sm font-medium">Algorithm</label>
         <Select value={algo} onValueChange={(v) => setAlgo(v as HashAlgo)}>
-          <SelectTrigger className="bg-white/5"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="bg-white/5">
+            <SelectValue />
+          </SelectTrigger>
           <SelectContent>
-            {ALGOS.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}
+            {ALGOS.map((a) => (
+              <SelectItem key={a} value={a}>
+                {a}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
@@ -110,9 +145,16 @@ function Compare() {
 
   useEffect(() => {
     let cancelled = false;
-    if (!text) { setActual(""); return; }
-    hashText(text, algo).then((h) => { if (!cancelled) setActual(h); });
-    return () => { cancelled = true; };
+    if (!text) {
+      setActual("");
+      return;
+    }
+    hashText(text, algo).then((h) => {
+      if (!cancelled) setActual(h);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [text, algo]);
 
   const match = actual && expected && actual.toLowerCase() === expected.trim().toLowerCase();
@@ -121,27 +163,51 @@ function Compare() {
     <GlassCard className="space-y-5 p-6">
       <div className="space-y-2">
         <label className="text-sm font-medium">Phrase to test</label>
-        <Input value={text} onChange={(e) => setText(e.target.value)} placeholder="the door opens at midnight" className="bg-white/5" />
+        <Input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="the door opens at midnight"
+          className="bg-white/5"
+        />
       </div>
       <div className="space-y-2">
         <label className="text-sm font-medium">Expected hash</label>
-        <Input value={expected} onChange={(e) => setExpected(e.target.value)} placeholder="Paste the hash you're checking against" className="bg-white/5 font-mono text-xs" />
+        <Input
+          value={expected}
+          onChange={(e) => setExpected(e.target.value)}
+          placeholder="Paste the hash you're checking against"
+          className="bg-white/5 font-mono text-xs"
+        />
       </div>
       <div className="space-y-2">
         <label className="text-sm font-medium">Algorithm</label>
         <Select value={algo} onValueChange={(v) => setAlgo(v as HashAlgo)}>
-          <SelectTrigger className="bg-white/5"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="bg-white/5">
+            <SelectValue />
+          </SelectTrigger>
           <SelectContent>
-            {ALGOS.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}
+            {ALGOS.map((a) => (
+              <SelectItem key={a} value={a}>
+                {a}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
       {text && expected && (
-        <div className={`flex items-center gap-3 rounded-lg border p-4 ${match ? "border-emerald-400/30 bg-emerald-500/10" : "border-rose-400/30 bg-rose-500/10"}`}>
-          {match ? <Check className="h-5 w-5 text-emerald-300" /> : <X className="h-5 w-5 text-rose-300" />}
+        <div
+          className={`flex items-center gap-3 rounded-lg border p-4 ${match ? "border-emerald-400/30 bg-emerald-500/10" : "border-rose-400/30 bg-rose-500/10"}`}
+        >
+          {match ? (
+            <Check className="h-5 w-5 text-emerald-300" />
+          ) : (
+            <X className="h-5 w-5 text-rose-300" />
+          )}
           <div>
             <div className="text-sm font-medium">{match ? "Match" : "No match"}</div>
-            <div className="text-xs text-muted-foreground">{match ? "The phrase produces the expected hash." : "Try another phrase."}</div>
+            <div className="text-xs text-muted-foreground">
+              {match ? "The phrase produces the expected hash." : "Try another phrase."}
+            </div>
           </div>
         </div>
       )}

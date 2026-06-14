@@ -16,9 +16,15 @@ export const Route = createFileRoute("/tools/image-secret")({
   head: () => ({
     meta: [
       { title: "Hide message in an image — Easter" },
-      { name: "description", content: "Tuck a hidden note inside a PNG image. Looks identical to the eye." },
+      {
+        name: "description",
+        content: "Tuck a hidden note inside a PNG image. Looks identical to the eye.",
+      },
       { property: "og:title", content: "Hide message in an image — Easter" },
-      { property: "og:description", content: "Hide and reveal messages inside PNG images, right in your browser." },
+      {
+        property: "og:description",
+        content: "Hide and reveal messages inside PNG images, right in your browser.",
+      },
     ],
   }),
   component: ImageSecret,
@@ -34,11 +40,19 @@ function ImageSecret() {
       />
       <Tabs defaultValue="hide" className="w-full">
         <TabsList className="glass-panel mb-6 grid w-full grid-cols-2 rounded-xl p-1">
-          <TabsTrigger value="hide" className="rounded-lg">Hide</TabsTrigger>
-          <TabsTrigger value="reveal" className="rounded-lg">Reveal</TabsTrigger>
+          <TabsTrigger value="hide" className="rounded-lg">
+            Hide
+          </TabsTrigger>
+          <TabsTrigger value="reveal" className="rounded-lg">
+            Reveal
+          </TabsTrigger>
         </TabsList>
-        <TabsContent value="hide"><HideTab /></TabsContent>
-        <TabsContent value="reveal"><RevealTab /></TabsContent>
+        <TabsContent value="hide">
+          <HideTab />
+        </TabsContent>
+        <TabsContent value="reveal">
+          <RevealTab />
+        </TabsContent>
       </Tabs>
       <div className="mt-6 text-xs text-muted-foreground">
         Tip: use PNG for best results. JPEG compression may destroy hidden data.
@@ -113,14 +127,22 @@ function HideTab() {
           className="bg-white/5"
         />
       </div>
-      <Button onClick={onHide} disabled={busy} className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground">
+      <Button
+        onClick={onHide}
+        disabled={busy}
+        className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground"
+      >
         <ImageIcon className="mr-2 h-4 w-4" />
         {busy ? "Hiding…" : "Hide message"}
       </Button>
       {resultUrl && (
         <div className="space-y-3 rounded-xl border border-white/10 bg-white/5 p-4">
           <div className="text-sm font-medium">Your image is ready</div>
-          <img src={resultUrl} alt="Result" className="max-h-48 w-full rounded-lg object-contain bg-black/30" />
+          <img
+            src={resultUrl}
+            alt="Result"
+            className="max-h-48 w-full rounded-lg object-contain bg-black/30"
+          />
           <a
             href={resultUrl}
             download="easter-secret.png"
@@ -142,7 +164,8 @@ function RevealTab() {
 
   const onReveal = async () => {
     if (!file) return toast.error("Choose an image first.");
-    setBusy(true); setMessage(null);
+    setBusy(true);
+    setMessage(null);
     try {
       const text = await revealMessageFromImage(file, password);
       setMessage(text);
@@ -156,7 +179,15 @@ function RevealTab() {
 
   return (
     <GlassCard className="space-y-5 p-6">
-      <FileDropzone accept="image/png" onFile={(f) => { setFile(f); setMessage(null); }} fileName={file?.name} hint="PNG only" />
+      <FileDropzone
+        accept="image/png"
+        onFile={(f) => {
+          setFile(f);
+          setMessage(null);
+        }}
+        fileName={file?.name}
+        hint="PNG only"
+      />
       <div className="space-y-2">
         <label className="text-sm font-medium">Password (if any)</label>
         <Input
@@ -167,7 +198,11 @@ function RevealTab() {
           className="bg-white/5"
         />
       </div>
-      <Button onClick={onReveal} disabled={busy} className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground">
+      <Button
+        onClick={onReveal}
+        disabled={busy}
+        className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground"
+      >
         <Eye className="mr-2 h-4 w-4" />
         {busy ? "Reading…" : "Reveal message"}
       </Button>
@@ -177,7 +212,9 @@ function RevealTab() {
             <div className="text-sm font-medium">Hidden message</div>
             <CopyButton value={message} />
           </div>
-          <pre className="whitespace-pre-wrap break-words font-sans text-sm text-foreground">{message}</pre>
+          <pre className="whitespace-pre-wrap break-words font-sans text-sm text-foreground">
+            {message}
+          </pre>
         </div>
       )}
     </GlassCard>

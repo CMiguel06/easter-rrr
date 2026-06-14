@@ -6,10 +6,12 @@ import { Input } from "@/components/ui/input";
 import { CopyButton } from "@/components/ui-custom/CopyButton";
 
 export const Route = createFileRoute("/tools/konami")({
-  head: () => ({ meta: [
-    { title: "Konami code easter egg — Easter" },
-    { name: "description", content: "Trigger a hidden reveal with the classic Konami Code." },
-  ]}),
+  head: () => ({
+    meta: [
+      { title: "Konami code easter egg — Easter" },
+      { name: "description", content: "Trigger a hidden reveal with the classic Konami Code." },
+    ],
+  }),
   component: Page,
 });
 
@@ -19,15 +21,33 @@ function Page() {
   const snippet = build(msg, url);
   return (
     <div className="mx-auto max-w-3xl">
-      <PageHeader eyebrow="Konami code" title="↑ ↑ ↓ ↓ ← → ← → B A" description="Add this to your own page to trigger a small reveal when visitors type the classic combo." />
+      <PageHeader
+        eyebrow="Konami code"
+        title="↑ ↑ ↓ ↓ ← → ← → B A"
+        description="Add this to your own page to trigger a small reveal when visitors type the classic combo."
+      />
       <GlassCard className="space-y-5 p-6">
-        <div className="space-y-2"><label className="text-sm font-medium">Reveal message</label>
-          <Input value={msg} onChange={(e) => setMsg(e.target.value)} className="bg-white/5" /></div>
-        <div className="space-y-2"><label className="text-sm font-medium">Optional redirect URL</label>
-          <Input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://…" className="bg-white/5" /></div>
         <div className="space-y-2">
-          <div className="flex items-center justify-between"><label className="text-sm font-medium">Snippet</label><CopyButton value={snippet} /></div>
-          <pre className="whitespace-pre-wrap break-all rounded-lg border border-white/10 bg-black/30 p-3 font-mono text-xs">{snippet}</pre>
+          <label className="text-sm font-medium">Reveal message</label>
+          <Input value={msg} onChange={(e) => setMsg(e.target.value)} className="bg-white/5" />
+        </div>
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Optional redirect URL</label>
+          <Input
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="https://…"
+            className="bg-white/5"
+          />
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-sm font-medium">Snippet</label>
+            <CopyButton value={snippet} />
+          </div>
+          <pre className="whitespace-pre-wrap break-all rounded-lg border border-white/10 bg-black/30 p-3 font-mono text-xs">
+            {snippet}
+          </pre>
         </div>
         <p className="text-xs text-muted-foreground">Use only on your own website.</p>
       </GlassCard>

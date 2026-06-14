@@ -14,9 +14,15 @@ export const Route = createFileRoute("/tools/qr-secret")({
   head: () => ({
     meta: [
       { title: "Secret QR — Easter" },
-      { name: "description", content: "Wrap any message, link or coordinate in a beautiful QR code." },
+      {
+        name: "description",
+        content: "Wrap any message, link or coordinate in a beautiful QR code.",
+      },
       { property: "og:title", content: "Secret QR — Easter" },
-      { property: "og:description", content: "Create a QR code as a clue, message or hidden link." },
+      {
+        property: "og:description",
+        content: "Create a QR code as a clue, message or hidden link.",
+      },
     ],
   }),
   component: QRSecret,
@@ -39,7 +45,8 @@ function QRSecret() {
       errorCorrectionLevel: "M",
     }).catch(() => {});
     QRCode.toString(content, { type: "svg", margin, color: { dark: "#e9eaff", light: "#0000" } })
-      .then(setSvg).catch(() => {});
+      .then(setSvg)
+      .catch(() => {});
   }, [content, size, margin]);
 
   const downloadPNG = () => {
@@ -48,7 +55,9 @@ function QRSecret() {
       if (!b) return toast.error("Could not export PNG.");
       const url = URL.createObjectURL(b);
       const a = document.createElement("a");
-      a.href = url; a.download = "easter-qr.png"; a.click();
+      a.href = url;
+      a.download = "easter-qr.png";
+      a.click();
       URL.revokeObjectURL(url);
     });
   };
@@ -57,7 +66,9 @@ function QRSecret() {
     const blob = new Blob([svg], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = "easter-qr.svg"; a.click();
+    a.href = url;
+    a.download = "easter-qr.svg";
+    a.click();
     URL.revokeObjectURL(url);
   };
 
@@ -72,19 +83,42 @@ function QRSecret() {
         <GlassCard className="space-y-5 p-6">
           <div className="space-y-2">
             <label className="text-sm font-medium">Content</label>
-            <Textarea rows={4} value={content} onChange={(e) => setContent(e.target.value)} className="bg-white/5" placeholder="Find the next clue under the old map" />
+            <Textarea
+              rows={4}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="bg-white/5"
+              placeholder="Find the next clue under the old map"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Label (optional, shown below QR)</label>
-            <Input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="Clue #1" className="bg-white/5" />
+            <Input
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              placeholder="Clue #1"
+              className="bg-white/5"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Size — {size}px</label>
-            <Slider value={[size]} onValueChange={(v) => setSize(v[0])} min={160} max={640} step={20} />
+            <Slider
+              value={[size]}
+              onValueChange={(v) => setSize(v[0])}
+              min={160}
+              max={640}
+              step={20}
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Margin — {margin}</label>
-            <Slider value={[margin]} onValueChange={(v) => setMargin(v[0])} min={0} max={8} step={1} />
+            <Slider
+              value={[margin]}
+              onValueChange={(v) => setMargin(v[0])}
+              min={0}
+              max={8}
+              step={1}
+            />
           </div>
           <div className="flex flex-wrap gap-2">
             <CopyButton value={content} label="Copy content" />
@@ -96,10 +130,16 @@ function QRSecret() {
           </div>
           {label && <div className="text-sm text-muted-foreground">{label}</div>}
           <div className="flex flex-wrap gap-2">
-            <button onClick={downloadPNG} className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-br from-primary to-accent px-4 py-2 text-sm font-medium text-primary-foreground">
+            <button
+              onClick={downloadPNG}
+              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-br from-primary to-accent px-4 py-2 text-sm font-medium text-primary-foreground"
+            >
               <Download className="h-4 w-4" /> PNG
             </button>
-            <button onClick={downloadSVG} className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm">
+            <button
+              onClick={downloadSVG}
+              className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm"
+            >
               <Download className="h-4 w-4" /> SVG
             </button>
           </div>

@@ -32,7 +32,8 @@
   --color-ring: var(--ring);
   --color-glass: var(--glass);
   --color-glass-border: var(--glass-border);
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", sans-serif;
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
 }
 
@@ -61,16 +62,15 @@
   --glass: oklch(1 0 0 / 5%);
   --glass-border: oklch(1 0 0 / 9%);
 
-  --gradient-aurora: linear-gradient(135deg,
+  --gradient-aurora: linear-gradient(
+    135deg,
     oklch(0.95 0.02 250) 0%,
     oklch(0.78 0.09 230) 60%,
-    oklch(0.72 0.12 215) 100%);
-  --gradient-soft: linear-gradient(160deg,
-    oklch(1 0 0 / 7%) 0%,
-    oklch(1 0 0 / 1.5%) 100%);
+    oklch(0.72 0.12 215) 100%
+  );
+  --gradient-soft: linear-gradient(160deg, oklch(1 0 0 / 7%) 0%, oklch(1 0 0 / 1.5%) 100%);
 
-  --shadow-glass: 0 8px 32px 0 oklch(0 0 0 / 45%),
-                  inset 0 1px 0 0 oklch(1 0 0 / 7%);
+  --shadow-glass: 0 8px 32px 0 oklch(0 0 0 / 45%), inset 0 1px 0 0 oklch(1 0 0 / 7%);
   --shadow-glow: 0 0 50px -14px oklch(0.72 0.16 245 / 45%);
 }
 
@@ -80,8 +80,11 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body {
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -92,13 +95,27 @@
     background-image:
       radial-gradient(ellipse 70% 50% at 20% 0%, oklch(0.72 0.16 245 / 8%), transparent 60%),
       radial-gradient(ellipse 60% 40% at 90% 20%, oklch(0.78 0.11 215 / 6%), transparent 65%),
-      radial-gradient(ellipse 60% 50% at 50% 110%, oklch(0.72 0.10 230 / 5%), transparent 60%);
+      radial-gradient(ellipse 60% 50% at 50% 110%, oklch(0.72 0.1 230 / 5%), transparent 60%);
     background-attachment: fixed;
     min-height: 100vh;
   }
-  h1, h2, h3, h4 { letter-spacing: -0.022em; font-family: var(--font-display); }
-  ::selection { background: oklch(0.72 0.16 245 / 35%); }
-  button, a, input, textarea, select { touch-action: manipulation; }
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.022em;
+    font-family: var(--font-display);
+  }
+  ::selection {
+    background: oklch(0.72 0.16 245 / 35%);
+  }
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    touch-action: manipulation;
+  }
 }
 
 @utility glass-panel {
@@ -109,9 +126,7 @@
 }
 
 @utility glass-strong {
-  background: linear-gradient(160deg,
-    oklch(1 0 0 / 8%) 0%,
-    oklch(1 0 0 / 2.5%) 100%);
+  background: linear-gradient(160deg, oklch(1 0 0 / 8%) 0%, oklch(1 0 0 / 2.5%) 100%);
   backdrop-filter: blur(36px) saturate(160%);
   border: 1px solid oklch(1 0 0 / 11%);
   box-shadow:
@@ -121,9 +136,11 @@
 }
 
 @utility glass-island {
-  background: linear-gradient(180deg,
+  background: linear-gradient(
+    180deg,
     oklch(0.22 0.006 250 / 75%) 0%,
-    oklch(0.16 0.005 250 / 70%) 100%);
+    oklch(0.16 0.005 250 / 70%) 100%
+  );
   backdrop-filter: blur(40px) saturate(180%);
   border: 1px solid oklch(1 0 0 / 10%);
   box-shadow:
@@ -139,32 +156,65 @@
 }
 
 @utility glow-ring {
-  box-shadow: 0 0 0 1px oklch(1 0 0 / 10%),
-              0 0 50px -10px oklch(0.72 0.16 245 / 50%);
+  box-shadow:
+    0 0 0 1px oklch(1 0 0 / 10%),
+    0 0 50px -10px oklch(0.72 0.16 245 / 50%);
 }
 
 @keyframes float-slow {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(20px, -30px) scale(1.04); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -30px) scale(1.04);
+  }
 }
 @keyframes float-slower {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-30px, 20px) scale(0.96); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 20px) scale(0.96);
+  }
 }
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
-.animate-float-slow { animation: float-slow 22s ease-in-out infinite; }
-.animate-float-slower { animation: float-slower 28s ease-in-out infinite; }
-.animate-fade-up { animation: fade-up 0.6s ease-out both; }
+.animate-float-slow {
+  animation: float-slow 22s ease-in-out infinite;
+}
+.animate-float-slower {
+  animation: float-slower 28s ease-in-out infinite;
+}
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-float-slow, .animate-float-slower, .animate-fade-up { animation: none !important; }
-  * { transition-duration: 0.01ms !important; }
+  .animate-float-slow,
+  .animate-float-slower,
+  .animate-fade-up {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }

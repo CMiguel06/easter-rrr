@@ -13,33 +13,68 @@ export const Route = createFileRoute("/tools/challenge")({
   head: () => ({
     meta: [
       { title: "Create a complete challenge — Easter" },
-      { name: "description", content: "Assemble a small treasure hunt by stacking steps, then export it as a local file." },
+      {
+        name: "description",
+        content:
+          "Assemble a small treasure hunt by stacking steps, then export it as a local file.",
+      },
       { property: "og:title", content: "Create a complete challenge — Easter" },
-      { property: "og:description", content: "Build, copy and export multi-step easter egg challenges." },
+      {
+        property: "og:description",
+        content: "Build, copy and export multi-step easter egg challenges.",
+      },
     ],
   }),
   component: ChallengePage,
 });
 
-type StepKind =
-  | "clue"
-  | "base64"
-  | "binary"
-  | "hash"
-  | "image"
-  | "qr"
-  | "reveal";
+type StepKind = "clue" | "base64" | "binary" | "hash" | "image" | "qr" | "reveal";
 
 type Step = { id: string; kind: StepKind; value: string };
 
 const STEP_LIB: { kind: StepKind; label: string; placeholder: string; desc: string }[] = [
-  { kind: "clue", label: "Start clue", placeholder: "Begin where the day ends.", desc: "An opening sentence to hook the player." },
-  { kind: "base64", label: "Encode in Base64", placeholder: "the second key is rain", desc: "Players decode Base64 to reveal the next clue." },
-  { kind: "binary", label: "Convert to binary", placeholder: "follow the river", desc: "Players translate binary back to text." },
-  { kind: "hash", label: "Hash verification", placeholder: "what comes after dusk", desc: "Players must find the phrase that matches a given hash." },
-  { kind: "image", label: "Hidden image message", placeholder: "look beneath the pixels", desc: "A note tucked inside an image you'll share." },
-  { kind: "qr", label: "QR clue", placeholder: "https://example.com/secret", desc: "A QR code with the next clue, link or coordinate." },
-  { kind: "reveal", label: "Final reveal", placeholder: "curiosity rewarded", desc: "The grand-prize sentence." },
+  {
+    kind: "clue",
+    label: "Start clue",
+    placeholder: "Begin where the day ends.",
+    desc: "An opening sentence to hook the player.",
+  },
+  {
+    kind: "base64",
+    label: "Encode in Base64",
+    placeholder: "the second key is rain",
+    desc: "Players decode Base64 to reveal the next clue.",
+  },
+  {
+    kind: "binary",
+    label: "Convert to binary",
+    placeholder: "follow the river",
+    desc: "Players translate binary back to text.",
+  },
+  {
+    kind: "hash",
+    label: "Hash verification",
+    placeholder: "what comes after dusk",
+    desc: "Players must find the phrase that matches a given hash.",
+  },
+  {
+    kind: "image",
+    label: "Hidden image message",
+    placeholder: "look beneath the pixels",
+    desc: "A note tucked inside an image you'll share.",
+  },
+  {
+    kind: "qr",
+    label: "QR clue",
+    placeholder: "https://example.com/secret",
+    desc: "A QR code with the next clue, link or coordinate.",
+  },
+  {
+    kind: "reveal",
+    label: "Final reveal",
+    placeholder: "curiosity rewarded",
+    desc: "The grand-prize sentence.",
+  },
 ];
 
 function ChallengePage() {
@@ -68,7 +103,8 @@ function ChallengePage() {
   };
 
   const remove = (id: string) => setSteps((p) => p.filter((s) => s.id !== id));
-  const update = (id: string, value: string) => setSteps((p) => p.map((s) => s.id === id ? { ...s, value } : s));
+  const update = (id: string, value: string) =>
+    setSteps((p) => p.map((s) => (s.id === id ? { ...s, value } : s)));
 
   const move = (id: string, dir: -1 | 1) => {
     setSteps((p) => {
@@ -122,7 +158,11 @@ function ChallengePage() {
         <div className="space-y-4">
           <GlassCard className="space-y-3 p-5">
             <label className="text-sm font-medium">Challenge title</label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} className="bg-white/5" />
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="bg-white/5"
+            />
             <div className="flex flex-wrap gap-2 pt-2">
               {STEP_LIB.filter((s) => s.kind !== "reveal").map((s) => (
                 <Button
@@ -144,18 +184,36 @@ function ChallengePage() {
                 <GlassCard key={s.id} className="p-4">
                   <div className="flex items-start gap-3">
                     <div className="flex flex-col items-center gap-1 pt-1">
-                      <button onClick={() => move(s.id, -1)} className="text-muted-foreground hover:text-foreground" aria-label="Up">▲</button>
+                      <button
+                        onClick={() => move(s.id, -1)}
+                        className="text-muted-foreground hover:text-foreground"
+                        aria-label="Up"
+                      >
+                        ▲
+                      </button>
                       <GripVertical className="h-4 w-4 text-muted-foreground" />
-                      <button onClick={() => move(s.id, 1)} className="text-muted-foreground hover:text-foreground" aria-label="Down">▼</button>
+                      <button
+                        onClick={() => move(s.id, 1)}
+                        className="text-muted-foreground hover:text-foreground"
+                        aria-label="Down"
+                      >
+                        ▼
+                      </button>
                     </div>
                     <div className="flex-1 space-y-2">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                          <span className="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted-foreground">Step {i + 1}</span>
+                          <span className="rounded-md bg-white/5 px-2 py-0.5 text-xs text-muted-foreground">
+                            Step {i + 1}
+                          </span>
                           <span className="text-sm font-medium">{meta.label}</span>
                         </div>
                         {s.kind !== "reveal" && (
-                          <button onClick={() => remove(s.id)} className="text-muted-foreground hover:text-rose-300" aria-label="Remove">
+                          <button
+                            onClick={() => remove(s.id)}
+                            className="text-muted-foreground hover:text-rose-300"
+                            aria-label="Remove"
+                          >
                             <X className="h-4 w-4" />
                           </button>
                         )}
@@ -175,10 +233,17 @@ function ChallengePage() {
             })}
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button onClick={exportJSON} className="bg-gradient-to-br from-primary to-accent text-primary-foreground">
+            <Button
+              onClick={exportJSON}
+              className="bg-gradient-to-br from-primary to-accent text-primary-foreground"
+            >
               <Download className="mr-2 h-4 w-4" /> Export as JSON
             </Button>
-            <Button variant="outline" className="border-white/10 bg-white/5" onClick={() => fileRef.current?.click()}>
+            <Button
+              variant="outline"
+              className="border-white/10 bg-white/5"
+              onClick={() => fileRef.current?.click()}
+            >
               <Upload className="mr-2 h-4 w-4" /> Import JSON
             </Button>
             <input
@@ -186,7 +251,11 @@ function ChallengePage() {
               type="file"
               accept="application/json"
               className="hidden"
-              onChange={(e) => { const f = e.target.files?.[0]; if (f) importJSON(f); e.target.value = ""; }}
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) importJSON(f);
+                e.target.value = "";
+              }}
             />
           </div>
         </div>

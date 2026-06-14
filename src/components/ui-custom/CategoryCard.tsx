@@ -4,8 +4,14 @@ import type { Category } from "@/lib/tools-data";
 import { toolsByCategory } from "@/lib/tools-data";
 
 export function CategoryCard({
-  name, description, icon: Icon,
-}: { name: Category; description: string; icon: LucideIcon }) {
+  name,
+  description,
+  icon: Icon,
+}: {
+  name: Category;
+  description: string;
+  icon: LucideIcon;
+}) {
   const items = toolsByCategory(name).slice(0, 4);
   return (
     <div className="glass-panel group rounded-2xl p-6 transition-all hover:-translate-y-0.5">
@@ -19,7 +25,10 @@ export function CategoryCard({
       <ul className="mt-4 space-y-1.5">
         {items.map((t) => (
           <li key={t.to}>
-            <Link to={t.to} className="flex items-center justify-between rounded-lg px-2 py-1 text-[13px] text-foreground/80 hover:bg-white/5 hover:text-foreground">
+            <Link
+              to={t.to}
+              className="flex items-center justify-between rounded-lg px-2 py-1 text-[13px] text-foreground/80 hover:bg-white/5 hover:text-foreground"
+            >
               <span>{t.title}</span>
               <ArrowRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-60" />
             </Link>

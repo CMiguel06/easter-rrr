@@ -48,7 +48,7 @@ export async function hideMessageInImage(
   full.set(payload, header.length);
 
   const totalBits = full.length * 8;
-  const capacity = imageData.data.length / 4 * 3; // 3 channels per pixel
+  const capacity = (imageData.data.length / 4) * 3; // 3 channels per pixel
   if (totalBits > capacity) {
     throw new Error("Image too small for this message. Try a larger image or a shorter message.");
   }
@@ -68,10 +68,7 @@ export async function hideMessageInImage(
   });
 }
 
-export async function revealMessageFromImage(
-  file: File,
-  password = "",
-): Promise<string> {
+export async function revealMessageFromImage(file: File, password = ""): Promise<string> {
   const img = await loadImage(file);
   const canvas = document.createElement("canvas");
   canvas.width = img.width;
@@ -115,8 +112,14 @@ function loadImage(file: File): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);
     const img = new Image();
-    img.onload = () => { resolve(img); URL.revokeObjectURL(url); };
-    img.onerror = () => { reject(new Error("Could not read image.")); URL.revokeObjectURL(url); };
+    img.onload = () => {
+      resolve(img);
+      URL.revokeObjectURL(url);
+    };
+    img.onerror = () => {
+      reject(new Error("Could not read image."));
+      URL.revokeObjectURL(url);
+    };
     img.src = url;
   });
 }

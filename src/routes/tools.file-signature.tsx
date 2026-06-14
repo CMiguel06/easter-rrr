@@ -7,10 +7,15 @@ import { CopyButton } from "@/components/ui-custom/CopyButton";
 import { identifySignature, bytesToHex } from "@/lib/detection";
 
 export const Route = createFileRoute("/tools/file-signature")({
-  head: () => ({ meta: [
-    { title: "File signature — Easter" },
-    { name: "description", content: "Read the first bytes of a local file to identify its type." },
-  ]}),
+  head: () => ({
+    meta: [
+      { title: "File signature — Easter" },
+      {
+        name: "description",
+        content: "Read the first bytes of a local file to identify its type.",
+      },
+    ],
+  }),
   component: Page,
 });
 
@@ -22,7 +27,9 @@ function Page() {
   const [sig, setSig] = useState<{ mime: string; ext: string } | null>(null);
 
   const handle = async (f: File) => {
-    setName(f.name); setSize(f.size); setType(f.type);
+    setName(f.name);
+    setSize(f.size);
+    setType(f.type);
     const buf = new Uint8Array(await f.slice(0, 32).arrayBuffer());
     setHead(buf);
     setSig(identifySignature(buf));
@@ -30,7 +37,11 @@ function Page() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <PageHeader eyebrow="Signature" title="File signature" description="The first few bytes of a file often reveal its true type. Processed locally." />
+      <PageHeader
+        eyebrow="Signature"
+        title="File signature"
+        description="The first few bytes of a file often reveal its true type. Processed locally."
+      />
       <GlassCard className="space-y-5 p-6">
         <FileDropzone accept="*/*" onFile={handle} fileName={name} hint="Any local file" />
         {head && (
@@ -42,8 +53,13 @@ function Page() {
               <Info label="Detected type" value={sig ? `${sig.ext} (${sig.mime})` : "Unknown"} />
             </div>
             <div className="space-y-2">
-              <div className="flex items-center justify-between"><label className="text-sm font-medium">First bytes (hex)</label><CopyButton value={bytesToHex(head)} /></div>
-              <div className="break-all rounded-lg border border-white/10 bg-black/30 p-3 font-mono text-xs">{bytesToHex(head)}</div>
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-medium">First bytes (hex)</label>
+                <CopyButton value={bytesToHex(head)} />
+              </div>
+              <div className="break-all rounded-lg border border-white/10 bg-black/30 p-3 font-mono text-xs">
+                {bytesToHex(head)}
+              </div>
             </div>
           </div>
         )}

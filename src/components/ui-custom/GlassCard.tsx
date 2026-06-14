@@ -8,11 +8,7 @@ export function GlassCard({
 }: HTMLAttributes<HTMLDivElement> & { strong?: boolean }) {
   return (
     <div
-      className={cn(
-        strong ? "glass-strong" : "glass-panel",
-        "rounded-2xl",
-        className,
-      )}
+      className={cn(strong ? "glass-strong" : "glass-panel", "rounded-2xl", className)}
       {...rest}
     />
   );

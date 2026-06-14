@@ -25,7 +25,10 @@ export function FileDropzone({
     <button
       type="button"
       onClick={() => inputRef.current?.click()}
-      onDragOver={(e) => { e.preventDefault(); setOver(true); }}
+      onDragOver={(e) => {
+        e.preventDefault();
+        setOver(true);
+      }}
       onDragLeave={() => setOver(false)}
       onDrop={handleDrop}
       className={cn(
@@ -40,7 +43,9 @@ export function FileDropzone({
         {fileName ? (
           <span className="font-medium">{fileName}</span>
         ) : (
-          <>Drop a file here or <span className="text-primary">browse</span></>
+          <>
+            Drop a file here or <span className="text-primary">browse</span>
+          </>
         )}
       </div>
       {hint && <div className="text-xs text-muted-foreground">{hint}</div>}

@@ -6,9 +6,16 @@ export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
       { title: "Privacy — Easter" },
-      { name: "description", content: "Easter requires no accounts and saves no history. Files stay in your browser whenever possible." },
+      {
+        name: "description",
+        content:
+          "Easter requires no accounts and saves no history. Files stay in your browser whenever possible.",
+      },
       { property: "og:title", content: "Privacy — Easter" },
-      { property: "og:description", content: "No accounts. No saved history. Local-first by design." },
+      {
+        property: "og:description",
+        content: "No accounts. No saved history. Local-first by design.",
+      },
     ],
   }),
   component: Page,
@@ -28,11 +35,13 @@ function Page() {
         <p>
           A few reminders, since this is a creative tool: be careful when sharing files publicly,
           metadata can reveal sensitive information, hidden HTML and CSS easter eggs are visible to
-          anyone viewing source, and password-encrypted content cannot be recovered without the password.
+          anyone viewing source, and password-encrypted content cannot be recovered without the
+          password.
         </p>
         <p>
-          Hashes are fingerprints, not encryption. Encoding is not encryption. Detections in the Reveal
-          Lab are heuristic guesses. Only inspect files and websites you own or are allowed to analyse.
+          Hashes are fingerprints, not encryption. Encoding is not encryption. Detections in the
+          Reveal Lab are heuristic guesses. Only inspect files and websites you own or are allowed
+          to analyse.
         </p>
       </GlassCard>
     </div>

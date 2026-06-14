@@ -14,11 +14,21 @@ export function Footer() {
               <p className="mt-2 text-sm text-muted-foreground">Hide meaning. Reward curiosity.</p>
             </div>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              <Link to="/tools" className="hover:text-foreground">Tools</Link>
-              <Link to="/puzzles" className="hover:text-foreground">Puzzles</Link>
-              <Link to="/tools/easter-hunter" className="hover:text-foreground">Reveal Lab</Link>
-              <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
-              <Link to="/about" className="hover:text-foreground">About</Link>
+              <Link to="/tools" className="hover:text-foreground">
+                Tools
+              </Link>
+              <Link to="/puzzles" className="hover:text-foreground">
+                Puzzles
+              </Link>
+              <Link to="/tools/easter-hunter" className="hover:text-foreground">
+                Reveal Lab
+              </Link>
+              <Link to="/privacy" className="hover:text-foreground">
+                Privacy
+              </Link>
+              <Link to="/about" className="hover:text-foreground">
+                About
+              </Link>
             </div>
           </div>
           <div className="mt-6 border-t border-white/5 pt-4 text-xs text-muted-foreground">

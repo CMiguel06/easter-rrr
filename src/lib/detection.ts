@@ -1,51 +1,162 @@
 // Heuristic detectors for the Reveal Lab.
 
-export type DetectKey = "base64" | "hex" | "binary" | "rot13" | "url" | "unicode" | "morse" | "ascii" | "hash" | "invisible" | "html-comment";
+export type DetectKey =
+  | "base64"
+  | "hex"
+  | "binary"
+  | "rot13"
+  | "url"
+  | "unicode"
+  | "morse"
+  | "ascii"
+  | "hash"
+  | "invisible"
+  | "html-comment";
 
-export type Detection = { key: DetectKey; label: string; confidence: "Low" | "Medium" | "High"; note: string };
+export type Detection = {
+  key: DetectKey;
+  label: string;
+  confidence: "Low" | "Medium" | "High";
+  note: string;
+};
 
 const INVISIBLE_REGEX = /[\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF]/g;
+
+function isValidBase64(value: string) {
+  try {
+    atob(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export function detect(text: string): Detection[] {
   const t = text.trim();
   const out: Detection[] = [];
   if (!t) return out;
 
-  if (INVISIBLE_REGEX.test(t)) out.push({ key: "invisible", label: "Invisible characters", confidence: "High", note: "Zero-width or bidi characters were found inside the text." });
+  if (INVISIBLE_REGEX.test(t))
+    out.push({
+      key: "invisible",
+      label: "Invisible characters",
+      confidence: "High",
+      note: "Zero-width or bidi characters were found inside the text.",
+    });
 
   if (/^[A-Za-z0-9+/=\s]+$/.test(t) && t.replace(/\s+/g, "").length % 4 === 0 && t.length >= 8) {
-    try { atob(t.replace(/\s+/g, "")); out.push({ key: "base64", label: "Looks like Base64", confidence: "Medium", note: "Characters match Base64 and the length is valid." }); } catch {}
+    if (isValidBase64(t.replace(/\s+/g, ""))) {
+      out.push({
+        key: "base64",
+        label: "Looks like Base64",
+        confidence: "Medium",
+        note: "Characters match Base64 and the length is valid.",
+      });
+    }
   }
-  if (/^[0-9a-fA-F\s]+$/.test(t) && t.replace(/\s+/g, "").length >= 8 && t.replace(/\s+/g, "").length % 2 === 0) {
-    out.push({ key: "hex", label: "Looks like hexadecimal", confidence: "Medium", note: "Only hex digits — could be bytes encoded in hex." });
+  if (
+    /^[0-9a-fA-F\s]+$/.test(t) &&
+    t.replace(/\s+/g, "").length >= 8 &&
+    t.replace(/\s+/g, "").length % 2 === 0
+  ) {
+    out.push({
+      key: "hex",
+      label: "Looks like hexadecimal",
+      confidence: "Medium",
+      note: "Only hex digits — could be bytes encoded in hex.",
+    });
   }
   if (/^[01\s]+$/.test(t) && t.replace(/\s+/g, "").length >= 8) {
-    out.push({ key: "binary", label: "Looks like binary", confidence: "Medium", note: "Only 0s and 1s — could be a binary-encoded message." });
+    out.push({
+      key: "binary",
+      label: "Looks like binary",
+      confidence: "Medium",
+      note: "Only 0s and 1s — could be a binary-encoded message.",
+    });
   }
   if (/^[.\-/\s]+$/.test(t) && t.length >= 3) {
-    out.push({ key: "morse", label: "Looks like Morse code", confidence: "High", note: "Only dots, dashes and slashes — try the Morse decoder." });
+    out.push({
+      key: "morse",
+      label: "Looks like Morse code",
+      confidence: "High",
+      note: "Only dots, dashes and slashes — try the Morse decoder.",
+    });
   }
   if (/%[0-9A-Fa-f]{2}/.test(t)) {
-    out.push({ key: "url", label: "Contains URL-encoded characters", confidence: "High", note: "Sequences like %20 suggest URL encoding." });
+    out.push({
+      key: "url",
+      label: "Contains URL-encoded characters",
+      confidence: "High",
+      note: "Sequences like %20 suggest URL encoding.",
+    });
   }
   if (/\\u[0-9a-fA-F]{4}/.test(t)) {
-    out.push({ key: "unicode", label: "Contains Unicode escape sequences", confidence: "High", note: "\\uXXXX sequences are present." });
+    out.push({
+      key: "unicode",
+      label: "Contains Unicode escape sequences",
+      confidence: "High",
+      note: "\\uXXXX sequences are present.",
+    });
   }
   if (/^([0-9]{1,3}\s)+[0-9]{1,3}$/.test(t)) {
-    out.push({ key: "ascii", label: "Looks like ASCII codes", confidence: "Medium", note: "Numbers separated by spaces could be character codes." });
+    out.push({
+      key: "ascii",
+      label: "Looks like ASCII codes",
+      confidence: "Medium",
+      note: "Numbers separated by spaces could be character codes.",
+    });
   }
-  if (/^[a-fA-F0-9]{32}$/.test(t)) out.push({ key: "hash", label: "Looks like an MD5 hash", confidence: "High", note: "32 hex characters — typical MD5 length." });
-  if (/^[a-fA-F0-9]{40}$/.test(t)) out.push({ key: "hash", label: "Looks like a SHA-1 hash", confidence: "High", note: "40 hex characters — typical SHA-1 length." });
-  if (/^[a-fA-F0-9]{64}$/.test(t)) out.push({ key: "hash", label: "Looks like a SHA-256 hash", confidence: "High", note: "64 hex characters — typical SHA-256 length." });
-  if (/^[a-fA-F0-9]{128}$/.test(t)) out.push({ key: "hash", label: "Looks like a SHA-512 hash", confidence: "High", note: "128 hex characters — typical SHA-512 length." });
+  if (/^[a-fA-F0-9]{32}$/.test(t))
+    out.push({
+      key: "hash",
+      label: "Looks like an MD5 hash",
+      confidence: "High",
+      note: "32 hex characters — typical MD5 length.",
+    });
+  if (/^[a-fA-F0-9]{40}$/.test(t))
+    out.push({
+      key: "hash",
+      label: "Looks like a SHA-1 hash",
+      confidence: "High",
+      note: "40 hex characters — typical SHA-1 length.",
+    });
+  if (/^[a-fA-F0-9]{64}$/.test(t))
+    out.push({
+      key: "hash",
+      label: "Looks like a SHA-256 hash",
+      confidence: "High",
+      note: "64 hex characters — typical SHA-256 length.",
+    });
+  if (/^[a-fA-F0-9]{128}$/.test(t))
+    out.push({
+      key: "hash",
+      label: "Looks like a SHA-512 hash",
+      confidence: "High",
+      note: "128 hex characters — typical SHA-512 length.",
+    });
 
   // ROT13 heuristic: only letters but doesn't form common words (very loose)
-  if (/^[A-Za-z\s.,!?'"-]+$/.test(t) && /[a-zA-Z]/.test(t) && !/\b(the|and|you|that|this|with|hello|easter)\b/i.test(t) && t.length >= 6) {
-    out.push({ key: "rot13", label: "Might be ROT13 / Caesar shifted", confidence: "Low", note: "Plain letters that don't read as English — try ROT13 or Caesar." });
+  if (
+    /^[A-Za-z\s.,!?'"-]+$/.test(t) &&
+    /[a-zA-Z]/.test(t) &&
+    !/\b(the|and|you|that|this|with|hello|easter)\b/i.test(t) &&
+    t.length >= 6
+  ) {
+    out.push({
+      key: "rot13",
+      label: "Might be ROT13 / Caesar shifted",
+      confidence: "Low",
+      note: "Plain letters that don't read as English — try ROT13 or Caesar.",
+    });
   }
 
   if (/<!--[\s\S]*?-->/.test(t)) {
-    out.push({ key: "html-comment", label: "Contains HTML comments", confidence: "High", note: "<!-- ... --> blocks are present in the text." });
+    out.push({
+      key: "html-comment",
+      label: "Contains HTML comments",
+      confidence: "High",
+      note: "<!-- ... --> blocks are present in the text.",
+    });
   }
 
   return out;
@@ -66,14 +177,20 @@ export function identifySignature(bytes: Uint8Array): { mime: string; ext: strin
   for (const s of FILE_SIGNATURES) {
     const offset = s.ext.includes("offset 4") ? 4 : 0;
     let match = true;
-    for (let i = 0; i < s.sig.length; i++) if (bytes[offset + i] !== s.sig[i]) { match = false; break; }
+    for (let i = 0; i < s.sig.length; i++)
+      if (bytes[offset + i] !== s.sig[i]) {
+        match = false;
+        break;
+      }
     if (match) return { mime: s.mime, ext: s.ext };
   }
   return null;
 }
 
 export function bytesToHex(bytes: Uint8Array): string {
-  return Array.from(bytes).map((b) => b.toString(16).padStart(2, "0")).join(" ");
+  return Array.from(bytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join(" ");
 }
 
 export function extractStrings(bytes: Uint8Array, min = 4): string[] {
@@ -81,7 +198,10 @@ export function extractStrings(bytes: Uint8Array, min = 4): string[] {
   let current = "";
   for (const b of bytes) {
     if (b >= 0x20 && b <= 0x7e) current += String.fromCharCode(b);
-    else { if (current.length >= min) out.push(current); current = ""; }
+    else {
+      if (current.length >= min) out.push(current);
+      current = "";
+    }
   }
   if (current.length >= min) out.push(current);
   return out;

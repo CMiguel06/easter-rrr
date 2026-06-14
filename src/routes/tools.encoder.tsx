@@ -5,7 +5,13 @@ import { ArrowLeftRight, Eraser } from "lucide-react";
 import { PageHeader } from "@/components/ui-custom/PageHeader";
 import { GlassCard } from "@/components/ui-custom/GlassCard";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui-custom/CopyButton";
 import { encoders, type EncoderKey } from "@/lib/encoders";
@@ -14,9 +20,15 @@ export const Route = createFileRoute("/tools/encoder")({
   head: () => ({
     meta: [
       { title: "Encode / decode text — Easter" },
-      { name: "description", content: "Convert text to and from Base64, binary, hex, ROT13, Morse and ASCII." },
+      {
+        name: "description",
+        content: "Convert text to and from Base64, binary, hex, ROT13, Morse and ASCII.",
+      },
       { property: "og:title", content: "Encode / decode text — Easter" },
-      { property: "og:description", content: "A friendly converter for Base64, binary, hex, ROT13, Morse and ASCII." },
+      {
+        property: "og:description",
+        content: "A friendly converter for Base64, binary, hex, ROT13, Morse and ASCII.",
+      },
     ],
   }),
   component: EncoderPage,
@@ -55,7 +67,10 @@ function EncoderPage() {
     setOutput(input);
   };
 
-  const clear = () => { setInput(""); setOutput(""); };
+  const clear = () => {
+    setInput("");
+    setOutput("");
+  };
 
   const isRot = tool === "rot13";
 
@@ -70,18 +85,40 @@ function EncoderPage() {
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="space-y-2">
             <label className="text-sm font-medium">Format</label>
-            <Select value={tool} onValueChange={(v) => { const k = v as EncoderKey; setTool(k); if (input) run(input, k, dir); }}>
-              <SelectTrigger className="bg-white/5"><SelectValue /></SelectTrigger>
+            <Select
+              value={tool}
+              onValueChange={(v) => {
+                const k = v as EncoderKey;
+                setTool(k);
+                if (input) run(input, k, dir);
+              }}
+            >
+              <SelectTrigger className="bg-white/5">
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
-                {OPTIONS.map((o) => <SelectItem key={o.key} value={o.key}>{o.label}</SelectItem>)}
+                {OPTIONS.map((o) => (
+                  <SelectItem key={o.key} value={o.key}>
+                    {o.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
           {!isRot && (
             <div className="space-y-2">
               <label className="text-sm font-medium">Direction</label>
-              <Select value={dir} onValueChange={(v) => { const d = v as "encode" | "decode"; setDir(d); if (input) run(input, tool, d); }}>
-                <SelectTrigger className="bg-white/5"><SelectValue /></SelectTrigger>
+              <Select
+                value={dir}
+                onValueChange={(v) => {
+                  const d = v as "encode" | "decode";
+                  setDir(d);
+                  if (input) run(input, tool, d);
+                }}
+              >
+                <SelectTrigger className="bg-white/5">
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="encode">Encode</SelectItem>
                   <SelectItem value="decode">Decode</SelectItem>
@@ -95,7 +132,10 @@ function EncoderPage() {
           <Textarea
             rows={5}
             value={input}
-            onChange={(e) => { setInput(e.target.value); run(e.target.value); }}
+            onChange={(e) => {
+              setInput(e.target.value);
+              run(e.target.value);
+            }}
             placeholder="Type or paste anything here…"
             className="bg-white/5"
           />
@@ -113,7 +153,13 @@ function EncoderPage() {
             <label className="text-sm font-medium">Output</label>
             <CopyButton value={output} />
           </div>
-          <Textarea rows={5} value={output} readOnly className="bg-black/30 font-mono text-sm" placeholder="Result appears here…" />
+          <Textarea
+            rows={5}
+            value={output}
+            readOnly
+            className="bg-black/30 font-mono text-sm"
+            placeholder="Result appears here…"
+          />
         </div>
       </GlassCard>
     </div>

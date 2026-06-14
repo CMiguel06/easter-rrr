@@ -5,7 +5,13 @@ import { LocalFirstBadge } from "./LocalFirstBadge";
 import type { Difficulty } from "@/lib/tools-data";
 
 export function ToolCard({
-  to, icon: Icon, title, description, difficulty, localFirst, category,
+  to,
+  icon: Icon,
+  title,
+  description,
+  difficulty,
+  localFirst,
+  category,
 }: {
   to: string;
   icon: LucideIcon;
@@ -22,7 +28,10 @@ export function ToolCard({
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ background: "radial-gradient(420px circle at 30% 0%, oklch(0.72 0.16 245 / 10%), transparent 70%)" }}
+        style={{
+          background:
+            "radial-gradient(420px circle at 30% 0%, oklch(0.72 0.16 245 / 10%), transparent 70%)",
+        }}
       />
       <div className="mb-4 flex items-center justify-between">
         <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
@@ -34,7 +43,11 @@ export function ToolCard({
       <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{description}</p>
       {(difficulty || localFirst || category) && (
         <div className="mt-4 flex flex-wrap items-center gap-1.5">
-          {category && <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">{category}</span>}
+          {category && (
+            <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">
+              {category}
+            </span>
+          )}
           {difficulty && <DifficultyBadge difficulty={difficulty} />}
           {localFirst && <LocalFirstBadge />}
         </div>

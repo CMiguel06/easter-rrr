@@ -1,7 +1,7 @@
 // Encode binary message via zero-width Unicode characters.
 const ZW_ZERO = "\u200B"; // zero-width space
-const ZW_ONE = "\u200C";  // zero-width non-joiner
-const ZW_END = "\u200D";  // zero-width joiner = terminator
+const ZW_ONE = "\u200C"; // zero-width non-joiner
+const ZW_END = "\u200D"; // zero-width joiner = terminator
 
 const INVISIBLE_REGEX = /[\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF]/g;
 
@@ -9,7 +9,11 @@ export function hideInvisible(carrier: string, secret: string): string {
   const bytes = new TextEncoder().encode(secret);
   let bits = "";
   bytes.forEach((b) => (bits += b.toString(2).padStart(8, "0")));
-  const encoded = bits.split("").map((b) => (b === "0" ? ZW_ZERO : ZW_ONE)).join("") + ZW_END;
+  const encoded =
+    bits
+      .split("")
+      .map((b) => (b === "0" ? ZW_ZERO : ZW_ONE))
+      .join("") + ZW_END;
   // Insert payload after the first character (or just append if empty)
   if (carrier.length === 0) return encoded;
   return carrier[0] + encoded + carrier.slice(1);

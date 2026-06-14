@@ -9,38 +9,216 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as PuzzlesRouteImport } from './routes/puzzles'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ToolsIndexRouteImport } from './routes/tools.index'
+import { Route as ToolsQrSecretRouteImport } from './routes/tools.qr-secret'
+import { Route as ToolsMetadataRouteImport } from './routes/tools.metadata'
+import { Route as ToolsInvisibleTextRouteImport } from './routes/tools.invisible-text'
+import { Route as ToolsImageSecretRouteImport } from './routes/tools.image-secret'
+import { Route as ToolsHashRouteImport } from './routes/tools.hash'
+import { Route as ToolsEncoderRouteImport } from './routes/tools.encoder'
+import { Route as ToolsChallengeRouteImport } from './routes/tools.challenge'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PuzzlesRoute = PuzzlesRouteImport.update({
+  id: '/puzzles',
+  path: '/puzzles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsQrSecretRoute = ToolsQrSecretRouteImport.update({
+  id: '/qr-secret',
+  path: '/qr-secret',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsMetadataRoute = ToolsMetadataRouteImport.update({
+  id: '/metadata',
+  path: '/metadata',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsInvisibleTextRoute = ToolsInvisibleTextRouteImport.update({
+  id: '/invisible-text',
+  path: '/invisible-text',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsImageSecretRoute = ToolsImageSecretRouteImport.update({
+  id: '/image-secret',
+  path: '/image-secret',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsHashRoute = ToolsHashRouteImport.update({
+  id: '/hash',
+  path: '/hash',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsEncoderRoute = ToolsEncoderRouteImport.update({
+  id: '/encoder',
+  path: '/encoder',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsChallengeRoute = ToolsChallengeRouteImport.update({
+  id: '/challenge',
+  path: '/challenge',
+  getParentRoute: () => ToolsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/privacy': typeof PrivacyRoute
+  '/puzzles': typeof PuzzlesRoute
+  '/tools': typeof ToolsRouteWithChildren
+  '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/hash': typeof ToolsHashRoute
+  '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/privacy': typeof PrivacyRoute
+  '/puzzles': typeof PuzzlesRoute
+  '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/hash': typeof ToolsHashRoute
+  '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools': typeof ToolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/privacy': typeof PrivacyRoute
+  '/puzzles': typeof PuzzlesRoute
+  '/tools': typeof ToolsRouteWithChildren
+  '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/hash': typeof ToolsHashRoute
+  '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/privacy'
+    | '/puzzles'
+    | '/tools'
+    | '/tools/challenge'
+    | '/tools/encoder'
+    | '/tools/hash'
+    | '/tools/image-secret'
+    | '/tools/invisible-text'
+    | '/tools/metadata'
+    | '/tools/qr-secret'
+    | '/tools/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/privacy'
+    | '/puzzles'
+    | '/tools/challenge'
+    | '/tools/encoder'
+    | '/tools/hash'
+    | '/tools/image-secret'
+    | '/tools/invisible-text'
+    | '/tools/metadata'
+    | '/tools/qr-secret'
+    | '/tools'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/privacy'
+    | '/puzzles'
+    | '/tools'
+    | '/tools/challenge'
+    | '/tools/encoder'
+    | '/tools/hash'
+    | '/tools/image-secret'
+    | '/tools/invisible-text'
+    | '/tools/metadata'
+    | '/tools/qr-secret'
+    | '/tools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  PrivacyRoute: typeof PrivacyRoute
+  PuzzlesRoute: typeof PuzzlesRoute
+  ToolsRoute: typeof ToolsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/puzzles': {
+      id: '/puzzles'
+      path: '/puzzles'
+      fullPath: '/puzzles'
+      preLoaderRoute: typeof PuzzlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +226,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/': {
+      id: '/tools/'
+      path: '/'
+      fullPath: '/tools/'
+      preLoaderRoute: typeof ToolsIndexRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/qr-secret': {
+      id: '/tools/qr-secret'
+      path: '/qr-secret'
+      fullPath: '/tools/qr-secret'
+      preLoaderRoute: typeof ToolsQrSecretRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/metadata': {
+      id: '/tools/metadata'
+      path: '/metadata'
+      fullPath: '/tools/metadata'
+      preLoaderRoute: typeof ToolsMetadataRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/invisible-text': {
+      id: '/tools/invisible-text'
+      path: '/invisible-text'
+      fullPath: '/tools/invisible-text'
+      preLoaderRoute: typeof ToolsInvisibleTextRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/image-secret': {
+      id: '/tools/image-secret'
+      path: '/image-secret'
+      fullPath: '/tools/image-secret'
+      preLoaderRoute: typeof ToolsImageSecretRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/hash': {
+      id: '/tools/hash'
+      path: '/hash'
+      fullPath: '/tools/hash'
+      preLoaderRoute: typeof ToolsHashRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/encoder': {
+      id: '/tools/encoder'
+      path: '/encoder'
+      fullPath: '/tools/encoder'
+      preLoaderRoute: typeof ToolsEncoderRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/challenge': {
+      id: '/tools/challenge'
+      path: '/challenge'
+      fullPath: '/tools/challenge'
+      preLoaderRoute: typeof ToolsChallengeRouteImport
+      parentRoute: typeof ToolsRoute
+    }
   }
 }
 
+interface ToolsRouteChildren {
+  ToolsChallengeRoute: typeof ToolsChallengeRoute
+  ToolsEncoderRoute: typeof ToolsEncoderRoute
+  ToolsHashRoute: typeof ToolsHashRoute
+  ToolsImageSecretRoute: typeof ToolsImageSecretRoute
+  ToolsInvisibleTextRoute: typeof ToolsInvisibleTextRoute
+  ToolsMetadataRoute: typeof ToolsMetadataRoute
+  ToolsQrSecretRoute: typeof ToolsQrSecretRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
+}
+
+const ToolsRouteChildren: ToolsRouteChildren = {
+  ToolsChallengeRoute: ToolsChallengeRoute,
+  ToolsEncoderRoute: ToolsEncoderRoute,
+  ToolsHashRoute: ToolsHashRoute,
+  ToolsImageSecretRoute: ToolsImageSecretRoute,
+  ToolsInvisibleTextRoute: ToolsInvisibleTextRoute,
+  ToolsMetadataRoute: ToolsMetadataRoute,
+  ToolsQrSecretRoute: ToolsQrSecretRoute,
+  ToolsIndexRoute: ToolsIndexRoute,
+}
+
+const ToolsRouteWithChildren = ToolsRoute._addFileChildren(ToolsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  PrivacyRoute: PrivacyRoute,
+  PuzzlesRoute: PuzzlesRoute,
+  ToolsRoute: ToolsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -29,70 +29,15 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build
+      - name: Build static site
         run: bun run build
-
-      - name: Prepare static output for GitHub Pages
-        id: output
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          if [ -f "dist/index.html" ]; then
-            OUT="dist"
-          elif [ -d "dist/client" ]; then
-            OUT="dist/client"
-
-            if [ ! -f "$OUT/index.html" ]; then
-              CSS_FILE="$(find "$OUT/assets" -maxdepth 1 -name 'styles-*.css' -printf '%f\n' | head -n 1 || true)"
-              JS_FILE="$(find "$OUT/assets" -maxdepth 1 -name 'index-*.js' -printf '%f\n' | head -n 1 || true)"
-
-              if [ -z "$JS_FILE" ]; then
-                echo "No client entry bundle found in $OUT/assets."
-                find "$OUT" -maxdepth 3 -type f | sort
-                exit 1
-              fi
-
-              CSS_TAG=""
-              if [ -n "$CSS_FILE" ]; then
-                CSS_TAG="<link rel=\"stylesheet\" href=\"./assets/$CSS_FILE\" />"
-              fi
-
-              cat > "$OUT/index.html" <<EOF
-          <!doctype html>
-          <html lang="en">
-            <head>
-              <meta charset="UTF-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-              <title>Easter</title>
-              $CSS_TAG
-              <script type="module" src="./assets/$JS_FILE"></script>
-            </head>
-            <body>
-              <div id="root"></div>
-            </body>
-          </html>
-          EOF
-            fi
-          elif [ -f ".output/public/index.html" ]; then
-            OUT=".output/public"
-          elif [ -f "build/client/index.html" ]; then
-            OUT="build/client"
-          else
-            echo "No static output found after build."
-            find . -maxdepth 4 -name index.html -print
-            find dist -maxdepth 3 -type f 2>/dev/null | sort || true
-            exit 1
-          fi
-
-          echo "path=$OUT" >> "$GITHUB_OUTPUT"
 
       - name: Prepare GitHub Pages artifact
         shell: bash
         run: |
-          OUT="${{ steps.output.outputs.path }}"
-          touch "$OUT/.nojekyll"
-          cp "$OUT/index.html" "$OUT/404.html"
+          test -f dist/index.html
+          touch dist/.nojekyll
+          cp dist/index.html dist/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -100,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.output.outputs.path }}
+          path: dist
 
   deploy:
     environment:

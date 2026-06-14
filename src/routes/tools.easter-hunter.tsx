@@ -66,23 +66,41 @@ function TextHunt() {
       });
     setFindings(f);
   };
+  const clear = () => {
+    setText("");
+    setFindings([]);
+  };
   return (
     <div className="space-y-5">
       <GlassCard className="space-y-4 p-6">
         <Textarea
           rows={6}
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            setText(e.target.value);
+            setFindings([]);
+          }}
           placeholder="Paste suspicious-looking text…"
           className="bg-white/5"
         />
-        <Button
-          onClick={run}
-          disabled={!text}
-          className="bg-primary text-primary-foreground hover:bg-primary/90"
-        >
-          Inspect
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            onClick={run}
+            disabled={!text}
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            Inspect
+          </Button>
+          <Button
+            type="button"
+            onClick={clear}
+            variant="outline"
+            className="border-white/10 bg-white/5"
+          >
+            Clear
+          </Button>
+        </div>
       </GlassCard>
       {findings.length > 0 && (
         <div className="grid gap-3 sm:grid-cols-2">

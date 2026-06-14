@@ -160,6 +160,17 @@ function ChallengePage() {
     toast.success("Challenge exported.");
   };
 
+  const exportMarkdown = () => {
+    const blob = new Blob([summary], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${title.toLowerCase().replace(/\s+/g, "-")}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Markdown exported.");
+  };
+
   const importJSON = async (file: File) => {
     try {
       const text = await file.text();
@@ -217,6 +228,7 @@ function ChallengePage() {
             <div className="flex flex-wrap gap-2 pt-2">
               {STEP_LIB.filter((s) => s.kind !== "reveal").map((s) => (
                 <Button
+                  type="button"
                   key={s.kind}
                   size="sm"
                   variant="outline"
@@ -236,6 +248,7 @@ function ChallengePage() {
                   <div className="flex items-start gap-3">
                     <div className="flex flex-col items-center gap-1 pt-1">
                       <button
+                        type="button"
                         onClick={() => move(s.id, -1)}
                         className="text-muted-foreground hover:text-foreground"
                         aria-label={`Move step ${i + 1} up`}
@@ -244,6 +257,7 @@ function ChallengePage() {
                       </button>
                       <GripVertical className="h-4 w-4 text-muted-foreground" />
                       <button
+                        type="button"
                         onClick={() => move(s.id, 1)}
                         className="text-muted-foreground hover:text-foreground"
                         aria-label={`Move step ${i + 1} down`}
@@ -261,6 +275,7 @@ function ChallengePage() {
                         </div>
                         {s.kind !== "reveal" && (
                           <button
+                            type="button"
                             onClick={() => remove(s.id)}
                             className="text-muted-foreground hover:text-rose-300"
                             aria-label={`Remove step ${i + 1}`}
@@ -285,12 +300,22 @@ function ChallengePage() {
           </div>
           <div className="flex flex-wrap gap-2">
             <Button
+              type="button"
               onClick={exportJSON}
               className="bg-gradient-to-br from-primary to-accent text-primary-foreground"
             >
               <Download className="mr-2 h-4 w-4" /> Export as JSON
             </Button>
             <Button
+              type="button"
+              variant="outline"
+              className="border-white/10 bg-white/5"
+              onClick={exportMarkdown}
+            >
+              <Download className="mr-2 h-4 w-4" /> Export Markdown
+            </Button>
+            <Button
+              type="button"
               variant="outline"
               className="border-white/10 bg-white/5"
               onClick={() => fileRef.current?.click()}

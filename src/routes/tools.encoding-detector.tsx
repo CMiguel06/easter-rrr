@@ -10,7 +10,7 @@ import { detect } from "@/lib/detection";
 export const Route = createFileRoute("/tools/encoding-detector")({
   head: () => ({
     meta: [
-      { title: "Encoding detector — Easter" },
+      { title: "Encoding detector - Easter" },
       {
         name: "description",
         content: "Guess what encoding a piece of text might be. Detection is heuristic.",
@@ -23,6 +23,27 @@ export const Route = createFileRoute("/tools/encoding-detector")({
 function Page() {
   const [text, setText] = useState("");
   const [findings, setFindings] = useState<RevealFinding[]>([]);
+  const [hasRun, setHasRun] = useState(false);
+
+  const run = () => {
+    setHasRun(true);
+    setFindings(
+      detect(text).map((d) => ({
+        title: `${d.label} - ${d.confidence}`,
+        message: d.note,
+        value: text.slice(0, 200),
+        to: routeFor(d.key),
+        ctaLabel: ctaFor(d.key),
+      })),
+    );
+  };
+
+  const clear = () => {
+    setText("");
+    setFindings([]);
+    setHasRun(false);
+  };
+
   return (
     <div className="mx-auto max-w-3xl">
       <PageHeader
@@ -34,27 +55,32 @@ function Page() {
         <Textarea
           rows={6}
           value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Paste suspicious text…"
+          onChange={(e) => {
+            setText(e.target.value);
+            setFindings([]);
+            setHasRun(false);
+          }}
+          placeholder="Paste suspicious text..."
           className="bg-white/5"
         />
-        <Button
-          onClick={() =>
-            setFindings(
-              detect(text).map((d) => ({
-                title: `${d.label} — ${d.confidence}`,
-                message: d.note,
-                value: text.slice(0, 200),
-                to: "/tools/encoder",
-                ctaLabel: "Open encoder",
-              })),
-            )
-          }
-          disabled={!text}
-          className="bg-primary text-primary-foreground hover:bg-primary/90"
-        >
-          Detect
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            onClick={run}
+            disabled={!text}
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            Detect
+          </Button>
+          <Button
+            type="button"
+            onClick={clear}
+            variant="outline"
+            className="border-white/10 bg-white/5"
+          >
+            Clear
+          </Button>
+        </div>
       </GlassCard>
       {findings.length > 0 && (
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -63,11 +89,31 @@ function Page() {
           ))}
         </div>
       )}
-      {findings.length === 0 && text && (
+      {hasRun && findings.length === 0 && (
         <div className="glass-panel mt-5 rounded-2xl p-6 text-center text-sm text-muted-foreground">
           Nothing obvious detected. Try a different snippet.
         </div>
       )}
     </div>
   );
+}
+
+function routeFor(k: string) {
+  switch (k) {
+    case "hash":
+      return "/tools/hash";
+    case "invisible":
+      return "/tools/invisible-detector";
+    case "html-comment":
+      return "/tools/source-clue-finder";
+    default:
+      return "/tools/encoder";
+  }
+}
+
+function ctaFor(k: string) {
+  if (k === "hash") return "Open hash tool";
+  if (k === "invisible") return "Open detector";
+  if (k === "html-comment") return "Open clue finder";
+  return "Open encoder";
 }

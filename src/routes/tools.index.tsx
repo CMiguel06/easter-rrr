@@ -51,6 +51,10 @@ function ToolsIndex() {
     navigate({ search: (s: Record<string, unknown>) => ({ ...s, category: c }) });
   const setDiff = (d?: string) =>
     navigate({ search: (s: Record<string, unknown>) => ({ ...s, difficulty: d }) });
+  const clearFilters = () => {
+    setQuery("");
+    navigate({ search: {} });
+  };
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -78,6 +82,7 @@ function ToolsIndex() {
           {DIFFS.map((d) => (
             <button
               key={d}
+              type="button"
               onClick={() => setDiff(difficulty === d ? undefined : d)}
               className={`rounded-full px-3 py-1.5 text-xs ${difficulty === d ? "bg-primary text-primary-foreground" : "border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground"}`}
             >
@@ -88,6 +93,7 @@ function ToolsIndex() {
       </div>
       <div className="mb-6 flex flex-wrap gap-1.5">
         <button
+          type="button"
           onClick={() => setCat(undefined)}
           className={`rounded-full px-3 py-1.5 text-xs ${!category ? "bg-primary text-primary-foreground" : "border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground"}`}
         >
@@ -96,6 +102,7 @@ function ToolsIndex() {
         {CATEGORIES.map((c) => (
           <button
             key={c.name}
+            type="button"
             onClick={() => setCat(c.name === category ? undefined : c.name)}
             className={`rounded-full px-3 py-1.5 text-xs ${category === c.name ? "bg-primary text-primary-foreground" : "border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground"}`}
           >
@@ -105,7 +112,14 @@ function ToolsIndex() {
       </div>
       {filtered.length === 0 ? (
         <div className="glass-panel rounded-2xl p-10 text-center text-sm text-muted-foreground">
-          Nothing matches. Try clearing the filters.
+          <div>Nothing matches. Try clearing the filters.</div>
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="mt-4 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-foreground hover:bg-white/10"
+          >
+            Clear filters
+          </button>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

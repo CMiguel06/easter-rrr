@@ -44,8 +44,8 @@ function ToolsIndex() {
     });
   }, [category, difficulty, query]);
 
-  const setCat = (c?: string) => navigate({ search: (s) => ({ ...s, category: c }) });
-  const setDiff = (d?: string) => navigate({ search: (s) => ({ ...s, difficulty: d }) });
+  const setCat = (c?: string) => navigate({ search: (s: Record<string, unknown>) => ({ ...s, category: c }) });
+  const setDiff = (d?: string) => navigate({ search: (s: Record<string, unknown>) => ({ ...s, difficulty: d }) });
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -55,7 +55,7 @@ function ToolsIndex() {
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             value={query}
-            onChange={(e) => { setQuery(e.target.value); navigate({ search: (s) => ({ ...s, q: e.target.value || undefined }) }); }}
+            onChange={(e) => { setQuery(e.target.value); navigate({ search: (s: Record<string, unknown>) => ({ ...s, q: e.target.value || undefined }) }); }}
             placeholder="Search tools"
             className="w-full rounded-xl border border-white/10 bg-white/5 py-2.5 pl-9 pr-3 text-sm outline-none focus:border-primary/40"
           />

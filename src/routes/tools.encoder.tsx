@@ -24,9 +24,13 @@ export const Route = createFileRoute("/tools/encoder")({
 
 const OPTIONS: { key: EncoderKey; label: string }[] = [
   { key: "base64", label: "Base64" },
+  { key: "base32", label: "Base32" },
   { key: "binary", label: "Binary" },
   { key: "hex", label: "Hex" },
   { key: "rot13", label: "ROT13" },
+  { key: "caesar3", label: "Caesar (+3)" },
+  { key: "url", label: "URL encoding" },
+  { key: "unicode", label: "Unicode escape" },
   { key: "morse", label: "Morse" },
   { key: "ascii", label: "ASCII codes" },
 ];

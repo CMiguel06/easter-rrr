@@ -15,13 +15,37 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
+import { Route as ToolsStringsRouteImport } from './routes/tools.strings'
+import { Route as ToolsSourceClueFinderRouteImport } from './routes/tools.source-clue-finder'
+import { Route as ToolsSecretNoteRouteImport } from './routes/tools.secret-note'
+import { Route as ToolsQrTrailRouteImport } from './routes/tools.qr-trail'
 import { Route as ToolsQrSecretRouteImport } from './routes/tools.qr-secret'
+import { Route as ToolsQrDecoderRouteImport } from './routes/tools.qr-decoder'
+import { Route as ToolsPuzzleReverseRouteImport } from './routes/tools.puzzle-reverse'
+import { Route as ToolsNthLetterRouteImport } from './routes/tools.nth-letter'
 import { Route as ToolsMetadataRouteImport } from './routes/tools.metadata'
+import { Route as ToolsKonamiRouteImport } from './routes/tools.konami'
 import { Route as ToolsInvisibleTextRouteImport } from './routes/tools.invisible-text'
+import { Route as ToolsInvisibleDetectorRouteImport } from './routes/tools.invisible-detector'
+import { Route as ToolsImportRouteImport } from './routes/tools.import'
+import { Route as ToolsImageWatermarkRouteImport } from './routes/tools.image-watermark'
 import { Route as ToolsImageSecretRouteImport } from './routes/tools.image-secret'
+import { Route as ToolsHtmlCommentRouteImport } from './routes/tools.html-comment'
+import { Route as ToolsHmacRouteImport } from './routes/tools.hmac'
+import { Route as ToolsHexViewerRouteImport } from './routes/tools.hex-viewer'
 import { Route as ToolsHashRouteImport } from './routes/tools.hash'
+import { Route as ToolsFinalDoorRouteImport } from './routes/tools.final-door'
+import { Route as ToolsFileSignatureRouteImport } from './routes/tools.file-signature'
+import { Route as ToolsFileChecksumRouteImport } from './routes/tools.file-checksum'
+import { Route as ToolsExportRouteImport } from './routes/tools.export'
+import { Route as ToolsEncryptRouteImport } from './routes/tools.encrypt'
+import { Route as ToolsEncodingDetectorRouteImport } from './routes/tools.encoding-detector'
 import { Route as ToolsEncoderRouteImport } from './routes/tools.encoder'
+import { Route as ToolsEasterHunterRouteImport } from './routes/tools.easter-hunter'
+import { Route as ToolsCssHiddenTextRouteImport } from './routes/tools.css-hidden-text'
+import { Route as ToolsConsoleMessageRouteImport } from './routes/tools.console-message'
 import { Route as ToolsChallengeRouteImport } from './routes/tools.challenge'
+import { Route as ToolsAcrosticRouteImport } from './routes/tools.acrostic'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -53,9 +77,44 @@ const ToolsIndexRoute = ToolsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsStringsRoute = ToolsStringsRouteImport.update({
+  id: '/strings',
+  path: '/strings',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsSourceClueFinderRoute = ToolsSourceClueFinderRouteImport.update({
+  id: '/source-clue-finder',
+  path: '/source-clue-finder',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsSecretNoteRoute = ToolsSecretNoteRouteImport.update({
+  id: '/secret-note',
+  path: '/secret-note',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsQrTrailRoute = ToolsQrTrailRouteImport.update({
+  id: '/qr-trail',
+  path: '/qr-trail',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsQrSecretRoute = ToolsQrSecretRouteImport.update({
   id: '/qr-secret',
   path: '/qr-secret',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsQrDecoderRoute = ToolsQrDecoderRouteImport.update({
+  id: '/qr-decoder',
+  path: '/qr-decoder',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsPuzzleReverseRoute = ToolsPuzzleReverseRouteImport.update({
+  id: '/puzzle-reverse',
+  path: '/puzzle-reverse',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsNthLetterRoute = ToolsNthLetterRouteImport.update({
+  id: '/nth-letter',
+  path: '/nth-letter',
   getParentRoute: () => ToolsRoute,
 } as any)
 const ToolsMetadataRoute = ToolsMetadataRouteImport.update({
@@ -63,9 +122,29 @@ const ToolsMetadataRoute = ToolsMetadataRouteImport.update({
   path: '/metadata',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsKonamiRoute = ToolsKonamiRouteImport.update({
+  id: '/konami',
+  path: '/konami',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsInvisibleTextRoute = ToolsInvisibleTextRouteImport.update({
   id: '/invisible-text',
   path: '/invisible-text',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsInvisibleDetectorRoute = ToolsInvisibleDetectorRouteImport.update({
+  id: '/invisible-detector',
+  path: '/invisible-detector',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsImportRoute = ToolsImportRouteImport.update({
+  id: '/import',
+  path: '/import',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsImageWatermarkRoute = ToolsImageWatermarkRouteImport.update({
+  id: '/image-watermark',
+  path: '/image-watermark',
   getParentRoute: () => ToolsRoute,
 } as any)
 const ToolsImageSecretRoute = ToolsImageSecretRouteImport.update({
@@ -73,9 +152,54 @@ const ToolsImageSecretRoute = ToolsImageSecretRouteImport.update({
   path: '/image-secret',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsHtmlCommentRoute = ToolsHtmlCommentRouteImport.update({
+  id: '/html-comment',
+  path: '/html-comment',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsHmacRoute = ToolsHmacRouteImport.update({
+  id: '/hmac',
+  path: '/hmac',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsHexViewerRoute = ToolsHexViewerRouteImport.update({
+  id: '/hex-viewer',
+  path: '/hex-viewer',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsHashRoute = ToolsHashRouteImport.update({
   id: '/hash',
   path: '/hash',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsFinalDoorRoute = ToolsFinalDoorRouteImport.update({
+  id: '/final-door',
+  path: '/final-door',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsFileSignatureRoute = ToolsFileSignatureRouteImport.update({
+  id: '/file-signature',
+  path: '/file-signature',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsFileChecksumRoute = ToolsFileChecksumRouteImport.update({
+  id: '/file-checksum',
+  path: '/file-checksum',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsExportRoute = ToolsExportRouteImport.update({
+  id: '/export',
+  path: '/export',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsEncryptRoute = ToolsEncryptRouteImport.update({
+  id: '/encrypt',
+  path: '/encrypt',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsEncodingDetectorRoute = ToolsEncodingDetectorRouteImport.update({
+  id: '/encoding-detector',
+  path: '/encoding-detector',
   getParentRoute: () => ToolsRoute,
 } as any)
 const ToolsEncoderRoute = ToolsEncoderRouteImport.update({
@@ -83,9 +207,29 @@ const ToolsEncoderRoute = ToolsEncoderRouteImport.update({
   path: '/encoder',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsEasterHunterRoute = ToolsEasterHunterRouteImport.update({
+  id: '/easter-hunter',
+  path: '/easter-hunter',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsCssHiddenTextRoute = ToolsCssHiddenTextRouteImport.update({
+  id: '/css-hidden-text',
+  path: '/css-hidden-text',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsConsoleMessageRoute = ToolsConsoleMessageRouteImport.update({
+  id: '/console-message',
+  path: '/console-message',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsChallengeRoute = ToolsChallengeRouteImport.update({
   id: '/challenge',
   path: '/challenge',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const ToolsAcrosticRoute = ToolsAcrosticRouteImport.update({
+  id: '/acrostic',
+  path: '/acrostic',
   getParentRoute: () => ToolsRoute,
 } as any)
 
@@ -95,13 +239,37 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/puzzles': typeof PuzzlesRoute
   '/tools': typeof ToolsRouteWithChildren
+  '/tools/acrostic': typeof ToolsAcrosticRoute
   '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/console-message': typeof ToolsConsoleMessageRoute
+  '/tools/css-hidden-text': typeof ToolsCssHiddenTextRoute
+  '/tools/easter-hunter': typeof ToolsEasterHunterRoute
   '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/encoding-detector': typeof ToolsEncodingDetectorRoute
+  '/tools/encrypt': typeof ToolsEncryptRoute
+  '/tools/export': typeof ToolsExportRoute
+  '/tools/file-checksum': typeof ToolsFileChecksumRoute
+  '/tools/file-signature': typeof ToolsFileSignatureRoute
+  '/tools/final-door': typeof ToolsFinalDoorRoute
   '/tools/hash': typeof ToolsHashRoute
+  '/tools/hex-viewer': typeof ToolsHexViewerRoute
+  '/tools/hmac': typeof ToolsHmacRoute
+  '/tools/html-comment': typeof ToolsHtmlCommentRoute
   '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/image-watermark': typeof ToolsImageWatermarkRoute
+  '/tools/import': typeof ToolsImportRoute
+  '/tools/invisible-detector': typeof ToolsInvisibleDetectorRoute
   '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/konami': typeof ToolsKonamiRoute
   '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/nth-letter': typeof ToolsNthLetterRoute
+  '/tools/puzzle-reverse': typeof ToolsPuzzleReverseRoute
+  '/tools/qr-decoder': typeof ToolsQrDecoderRoute
   '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/qr-trail': typeof ToolsQrTrailRoute
+  '/tools/secret-note': typeof ToolsSecretNoteRoute
+  '/tools/source-clue-finder': typeof ToolsSourceClueFinderRoute
+  '/tools/strings': typeof ToolsStringsRoute
   '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -109,13 +277,37 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/privacy': typeof PrivacyRoute
   '/puzzles': typeof PuzzlesRoute
+  '/tools/acrostic': typeof ToolsAcrosticRoute
   '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/console-message': typeof ToolsConsoleMessageRoute
+  '/tools/css-hidden-text': typeof ToolsCssHiddenTextRoute
+  '/tools/easter-hunter': typeof ToolsEasterHunterRoute
   '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/encoding-detector': typeof ToolsEncodingDetectorRoute
+  '/tools/encrypt': typeof ToolsEncryptRoute
+  '/tools/export': typeof ToolsExportRoute
+  '/tools/file-checksum': typeof ToolsFileChecksumRoute
+  '/tools/file-signature': typeof ToolsFileSignatureRoute
+  '/tools/final-door': typeof ToolsFinalDoorRoute
   '/tools/hash': typeof ToolsHashRoute
+  '/tools/hex-viewer': typeof ToolsHexViewerRoute
+  '/tools/hmac': typeof ToolsHmacRoute
+  '/tools/html-comment': typeof ToolsHtmlCommentRoute
   '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/image-watermark': typeof ToolsImageWatermarkRoute
+  '/tools/import': typeof ToolsImportRoute
+  '/tools/invisible-detector': typeof ToolsInvisibleDetectorRoute
   '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/konami': typeof ToolsKonamiRoute
   '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/nth-letter': typeof ToolsNthLetterRoute
+  '/tools/puzzle-reverse': typeof ToolsPuzzleReverseRoute
+  '/tools/qr-decoder': typeof ToolsQrDecoderRoute
   '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/qr-trail': typeof ToolsQrTrailRoute
+  '/tools/secret-note': typeof ToolsSecretNoteRoute
+  '/tools/source-clue-finder': typeof ToolsSourceClueFinderRoute
+  '/tools/strings': typeof ToolsStringsRoute
   '/tools': typeof ToolsIndexRoute
 }
 export interface FileRoutesById {
@@ -125,13 +317,37 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/puzzles': typeof PuzzlesRoute
   '/tools': typeof ToolsRouteWithChildren
+  '/tools/acrostic': typeof ToolsAcrosticRoute
   '/tools/challenge': typeof ToolsChallengeRoute
+  '/tools/console-message': typeof ToolsConsoleMessageRoute
+  '/tools/css-hidden-text': typeof ToolsCssHiddenTextRoute
+  '/tools/easter-hunter': typeof ToolsEasterHunterRoute
   '/tools/encoder': typeof ToolsEncoderRoute
+  '/tools/encoding-detector': typeof ToolsEncodingDetectorRoute
+  '/tools/encrypt': typeof ToolsEncryptRoute
+  '/tools/export': typeof ToolsExportRoute
+  '/tools/file-checksum': typeof ToolsFileChecksumRoute
+  '/tools/file-signature': typeof ToolsFileSignatureRoute
+  '/tools/final-door': typeof ToolsFinalDoorRoute
   '/tools/hash': typeof ToolsHashRoute
+  '/tools/hex-viewer': typeof ToolsHexViewerRoute
+  '/tools/hmac': typeof ToolsHmacRoute
+  '/tools/html-comment': typeof ToolsHtmlCommentRoute
   '/tools/image-secret': typeof ToolsImageSecretRoute
+  '/tools/image-watermark': typeof ToolsImageWatermarkRoute
+  '/tools/import': typeof ToolsImportRoute
+  '/tools/invisible-detector': typeof ToolsInvisibleDetectorRoute
   '/tools/invisible-text': typeof ToolsInvisibleTextRoute
+  '/tools/konami': typeof ToolsKonamiRoute
   '/tools/metadata': typeof ToolsMetadataRoute
+  '/tools/nth-letter': typeof ToolsNthLetterRoute
+  '/tools/puzzle-reverse': typeof ToolsPuzzleReverseRoute
+  '/tools/qr-decoder': typeof ToolsQrDecoderRoute
   '/tools/qr-secret': typeof ToolsQrSecretRoute
+  '/tools/qr-trail': typeof ToolsQrTrailRoute
+  '/tools/secret-note': typeof ToolsSecretNoteRoute
+  '/tools/source-clue-finder': typeof ToolsSourceClueFinderRoute
+  '/tools/strings': typeof ToolsStringsRoute
   '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRouteTypes {
@@ -142,13 +358,37 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/puzzles'
     | '/tools'
+    | '/tools/acrostic'
     | '/tools/challenge'
+    | '/tools/console-message'
+    | '/tools/css-hidden-text'
+    | '/tools/easter-hunter'
     | '/tools/encoder'
+    | '/tools/encoding-detector'
+    | '/tools/encrypt'
+    | '/tools/export'
+    | '/tools/file-checksum'
+    | '/tools/file-signature'
+    | '/tools/final-door'
     | '/tools/hash'
+    | '/tools/hex-viewer'
+    | '/tools/hmac'
+    | '/tools/html-comment'
     | '/tools/image-secret'
+    | '/tools/image-watermark'
+    | '/tools/import'
+    | '/tools/invisible-detector'
     | '/tools/invisible-text'
+    | '/tools/konami'
     | '/tools/metadata'
+    | '/tools/nth-letter'
+    | '/tools/puzzle-reverse'
+    | '/tools/qr-decoder'
     | '/tools/qr-secret'
+    | '/tools/qr-trail'
+    | '/tools/secret-note'
+    | '/tools/source-clue-finder'
+    | '/tools/strings'
     | '/tools/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -156,13 +396,37 @@ export interface FileRouteTypes {
     | '/about'
     | '/privacy'
     | '/puzzles'
+    | '/tools/acrostic'
     | '/tools/challenge'
+    | '/tools/console-message'
+    | '/tools/css-hidden-text'
+    | '/tools/easter-hunter'
     | '/tools/encoder'
+    | '/tools/encoding-detector'
+    | '/tools/encrypt'
+    | '/tools/export'
+    | '/tools/file-checksum'
+    | '/tools/file-signature'
+    | '/tools/final-door'
     | '/tools/hash'
+    | '/tools/hex-viewer'
+    | '/tools/hmac'
+    | '/tools/html-comment'
     | '/tools/image-secret'
+    | '/tools/image-watermark'
+    | '/tools/import'
+    | '/tools/invisible-detector'
     | '/tools/invisible-text'
+    | '/tools/konami'
     | '/tools/metadata'
+    | '/tools/nth-letter'
+    | '/tools/puzzle-reverse'
+    | '/tools/qr-decoder'
     | '/tools/qr-secret'
+    | '/tools/qr-trail'
+    | '/tools/secret-note'
+    | '/tools/source-clue-finder'
+    | '/tools/strings'
     | '/tools'
   id:
     | '__root__'
@@ -171,13 +435,37 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/puzzles'
     | '/tools'
+    | '/tools/acrostic'
     | '/tools/challenge'
+    | '/tools/console-message'
+    | '/tools/css-hidden-text'
+    | '/tools/easter-hunter'
     | '/tools/encoder'
+    | '/tools/encoding-detector'
+    | '/tools/encrypt'
+    | '/tools/export'
+    | '/tools/file-checksum'
+    | '/tools/file-signature'
+    | '/tools/final-door'
     | '/tools/hash'
+    | '/tools/hex-viewer'
+    | '/tools/hmac'
+    | '/tools/html-comment'
     | '/tools/image-secret'
+    | '/tools/image-watermark'
+    | '/tools/import'
+    | '/tools/invisible-detector'
     | '/tools/invisible-text'
+    | '/tools/konami'
     | '/tools/metadata'
+    | '/tools/nth-letter'
+    | '/tools/puzzle-reverse'
+    | '/tools/qr-decoder'
     | '/tools/qr-secret'
+    | '/tools/qr-trail'
+    | '/tools/secret-note'
+    | '/tools/source-clue-finder'
+    | '/tools/strings'
     | '/tools/'
   fileRoutesById: FileRoutesById
 }
@@ -233,11 +521,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsIndexRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/strings': {
+      id: '/tools/strings'
+      path: '/strings'
+      fullPath: '/tools/strings'
+      preLoaderRoute: typeof ToolsStringsRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/source-clue-finder': {
+      id: '/tools/source-clue-finder'
+      path: '/source-clue-finder'
+      fullPath: '/tools/source-clue-finder'
+      preLoaderRoute: typeof ToolsSourceClueFinderRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/secret-note': {
+      id: '/tools/secret-note'
+      path: '/secret-note'
+      fullPath: '/tools/secret-note'
+      preLoaderRoute: typeof ToolsSecretNoteRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/qr-trail': {
+      id: '/tools/qr-trail'
+      path: '/qr-trail'
+      fullPath: '/tools/qr-trail'
+      preLoaderRoute: typeof ToolsQrTrailRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/qr-secret': {
       id: '/tools/qr-secret'
       path: '/qr-secret'
       fullPath: '/tools/qr-secret'
       preLoaderRoute: typeof ToolsQrSecretRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/qr-decoder': {
+      id: '/tools/qr-decoder'
+      path: '/qr-decoder'
+      fullPath: '/tools/qr-decoder'
+      preLoaderRoute: typeof ToolsQrDecoderRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/puzzle-reverse': {
+      id: '/tools/puzzle-reverse'
+      path: '/puzzle-reverse'
+      fullPath: '/tools/puzzle-reverse'
+      preLoaderRoute: typeof ToolsPuzzleReverseRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/nth-letter': {
+      id: '/tools/nth-letter'
+      path: '/nth-letter'
+      fullPath: '/tools/nth-letter'
+      preLoaderRoute: typeof ToolsNthLetterRouteImport
       parentRoute: typeof ToolsRoute
     }
     '/tools/metadata': {
@@ -247,11 +584,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsMetadataRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/konami': {
+      id: '/tools/konami'
+      path: '/konami'
+      fullPath: '/tools/konami'
+      preLoaderRoute: typeof ToolsKonamiRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/invisible-text': {
       id: '/tools/invisible-text'
       path: '/invisible-text'
       fullPath: '/tools/invisible-text'
       preLoaderRoute: typeof ToolsInvisibleTextRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/invisible-detector': {
+      id: '/tools/invisible-detector'
+      path: '/invisible-detector'
+      fullPath: '/tools/invisible-detector'
+      preLoaderRoute: typeof ToolsInvisibleDetectorRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/import': {
+      id: '/tools/import'
+      path: '/import'
+      fullPath: '/tools/import'
+      preLoaderRoute: typeof ToolsImportRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/image-watermark': {
+      id: '/tools/image-watermark'
+      path: '/image-watermark'
+      fullPath: '/tools/image-watermark'
+      preLoaderRoute: typeof ToolsImageWatermarkRouteImport
       parentRoute: typeof ToolsRoute
     }
     '/tools/image-secret': {
@@ -261,11 +626,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsImageSecretRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/html-comment': {
+      id: '/tools/html-comment'
+      path: '/html-comment'
+      fullPath: '/tools/html-comment'
+      preLoaderRoute: typeof ToolsHtmlCommentRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/hmac': {
+      id: '/tools/hmac'
+      path: '/hmac'
+      fullPath: '/tools/hmac'
+      preLoaderRoute: typeof ToolsHmacRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/hex-viewer': {
+      id: '/tools/hex-viewer'
+      path: '/hex-viewer'
+      fullPath: '/tools/hex-viewer'
+      preLoaderRoute: typeof ToolsHexViewerRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/hash': {
       id: '/tools/hash'
       path: '/hash'
       fullPath: '/tools/hash'
       preLoaderRoute: typeof ToolsHashRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/final-door': {
+      id: '/tools/final-door'
+      path: '/final-door'
+      fullPath: '/tools/final-door'
+      preLoaderRoute: typeof ToolsFinalDoorRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/file-signature': {
+      id: '/tools/file-signature'
+      path: '/file-signature'
+      fullPath: '/tools/file-signature'
+      preLoaderRoute: typeof ToolsFileSignatureRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/file-checksum': {
+      id: '/tools/file-checksum'
+      path: '/file-checksum'
+      fullPath: '/tools/file-checksum'
+      preLoaderRoute: typeof ToolsFileChecksumRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/export': {
+      id: '/tools/export'
+      path: '/export'
+      fullPath: '/tools/export'
+      preLoaderRoute: typeof ToolsExportRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/encrypt': {
+      id: '/tools/encrypt'
+      path: '/encrypt'
+      fullPath: '/tools/encrypt'
+      preLoaderRoute: typeof ToolsEncryptRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/encoding-detector': {
+      id: '/tools/encoding-detector'
+      path: '/encoding-detector'
+      fullPath: '/tools/encoding-detector'
+      preLoaderRoute: typeof ToolsEncodingDetectorRouteImport
       parentRoute: typeof ToolsRoute
     }
     '/tools/encoder': {
@@ -275,6 +703,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsEncoderRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/easter-hunter': {
+      id: '/tools/easter-hunter'
+      path: '/easter-hunter'
+      fullPath: '/tools/easter-hunter'
+      preLoaderRoute: typeof ToolsEasterHunterRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/css-hidden-text': {
+      id: '/tools/css-hidden-text'
+      path: '/css-hidden-text'
+      fullPath: '/tools/css-hidden-text'
+      preLoaderRoute: typeof ToolsCssHiddenTextRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/tools/console-message': {
+      id: '/tools/console-message'
+      path: '/console-message'
+      fullPath: '/tools/console-message'
+      preLoaderRoute: typeof ToolsConsoleMessageRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/challenge': {
       id: '/tools/challenge'
       path: '/challenge'
@@ -282,28 +731,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsChallengeRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/acrostic': {
+      id: '/tools/acrostic'
+      path: '/acrostic'
+      fullPath: '/tools/acrostic'
+      preLoaderRoute: typeof ToolsAcrosticRouteImport
+      parentRoute: typeof ToolsRoute
+    }
   }
 }
 
 interface ToolsRouteChildren {
+  ToolsAcrosticRoute: typeof ToolsAcrosticRoute
   ToolsChallengeRoute: typeof ToolsChallengeRoute
+  ToolsConsoleMessageRoute: typeof ToolsConsoleMessageRoute
+  ToolsCssHiddenTextRoute: typeof ToolsCssHiddenTextRoute
+  ToolsEasterHunterRoute: typeof ToolsEasterHunterRoute
   ToolsEncoderRoute: typeof ToolsEncoderRoute
+  ToolsEncodingDetectorRoute: typeof ToolsEncodingDetectorRoute
+  ToolsEncryptRoute: typeof ToolsEncryptRoute
+  ToolsExportRoute: typeof ToolsExportRoute
+  ToolsFileChecksumRoute: typeof ToolsFileChecksumRoute
+  ToolsFileSignatureRoute: typeof ToolsFileSignatureRoute
+  ToolsFinalDoorRoute: typeof ToolsFinalDoorRoute
   ToolsHashRoute: typeof ToolsHashRoute
+  ToolsHexViewerRoute: typeof ToolsHexViewerRoute
+  ToolsHmacRoute: typeof ToolsHmacRoute
+  ToolsHtmlCommentRoute: typeof ToolsHtmlCommentRoute
   ToolsImageSecretRoute: typeof ToolsImageSecretRoute
+  ToolsImageWatermarkRoute: typeof ToolsImageWatermarkRoute
+  ToolsImportRoute: typeof ToolsImportRoute
+  ToolsInvisibleDetectorRoute: typeof ToolsInvisibleDetectorRoute
   ToolsInvisibleTextRoute: typeof ToolsInvisibleTextRoute
+  ToolsKonamiRoute: typeof ToolsKonamiRoute
   ToolsMetadataRoute: typeof ToolsMetadataRoute
+  ToolsNthLetterRoute: typeof ToolsNthLetterRoute
+  ToolsPuzzleReverseRoute: typeof ToolsPuzzleReverseRoute
+  ToolsQrDecoderRoute: typeof ToolsQrDecoderRoute
   ToolsQrSecretRoute: typeof ToolsQrSecretRoute
+  ToolsQrTrailRoute: typeof ToolsQrTrailRoute
+  ToolsSecretNoteRoute: typeof ToolsSecretNoteRoute
+  ToolsSourceClueFinderRoute: typeof ToolsSourceClueFinderRoute
+  ToolsStringsRoute: typeof ToolsStringsRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
 const ToolsRouteChildren: ToolsRouteChildren = {
+  ToolsAcrosticRoute: ToolsAcrosticRoute,
   ToolsChallengeRoute: ToolsChallengeRoute,
+  ToolsConsoleMessageRoute: ToolsConsoleMessageRoute,
+  ToolsCssHiddenTextRoute: ToolsCssHiddenTextRoute,
+  ToolsEasterHunterRoute: ToolsEasterHunterRoute,
   ToolsEncoderRoute: ToolsEncoderRoute,
+  ToolsEncodingDetectorRoute: ToolsEncodingDetectorRoute,
+  ToolsEncryptRoute: ToolsEncryptRoute,
+  ToolsExportRoute: ToolsExportRoute,
+  ToolsFileChecksumRoute: ToolsFileChecksumRoute,
+  ToolsFileSignatureRoute: ToolsFileSignatureRoute,
+  ToolsFinalDoorRoute: ToolsFinalDoorRoute,
   ToolsHashRoute: ToolsHashRoute,
+  ToolsHexViewerRoute: ToolsHexViewerRoute,
+  ToolsHmacRoute: ToolsHmacRoute,
+  ToolsHtmlCommentRoute: ToolsHtmlCommentRoute,
   ToolsImageSecretRoute: ToolsImageSecretRoute,
+  ToolsImageWatermarkRoute: ToolsImageWatermarkRoute,
+  ToolsImportRoute: ToolsImportRoute,
+  ToolsInvisibleDetectorRoute: ToolsInvisibleDetectorRoute,
   ToolsInvisibleTextRoute: ToolsInvisibleTextRoute,
+  ToolsKonamiRoute: ToolsKonamiRoute,
   ToolsMetadataRoute: ToolsMetadataRoute,
+  ToolsNthLetterRoute: ToolsNthLetterRoute,
+  ToolsPuzzleReverseRoute: ToolsPuzzleReverseRoute,
+  ToolsQrDecoderRoute: ToolsQrDecoderRoute,
   ToolsQrSecretRoute: ToolsQrSecretRoute,
+  ToolsQrTrailRoute: ToolsQrTrailRoute,
+  ToolsSecretNoteRoute: ToolsSecretNoteRoute,
+  ToolsSourceClueFinderRoute: ToolsSourceClueFinderRoute,
+  ToolsStringsRoute: ToolsStringsRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
 

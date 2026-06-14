@@ -32,21 +32,60 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Resolve static output
+      - name: Prepare static output for GitHub Pages
         id: output
         shell: bash
         run: |
+          set -euo pipefail
+
           if [ -f "dist/index.html" ]; then
-            echo "path=dist" >> "$GITHUB_OUTPUT"
+            OUT="dist"
+          elif [ -d "dist/client" ]; then
+            OUT="dist/client"
+
+            if [ ! -f "$OUT/index.html" ]; then
+              CSS_FILE="$(find "$OUT/assets" -maxdepth 1 -name 'styles-*.css' -printf '%f\n' | head -n 1 || true)"
+              JS_FILE="$(find "$OUT/assets" -maxdepth 1 -name 'index-*.js' -printf '%f\n' | head -n 1 || true)"
+
+              if [ -z "$JS_FILE" ]; then
+                echo "No client entry bundle found in $OUT/assets."
+                find "$OUT" -maxdepth 3 -type f | sort
+                exit 1
+              fi
+
+              CSS_TAG=""
+              if [ -n "$CSS_FILE" ]; then
+                CSS_TAG="<link rel=\"stylesheet\" href=\"./assets/$CSS_FILE\" />"
+              fi
+
+              cat > "$OUT/index.html" <<EOF
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Easter</title>
+              $CSS_TAG
+              <script type="module" src="./assets/$JS_FILE"></script>
+            </head>
+            <body>
+              <div id="root"></div>
+            </body>
+          </html>
+          EOF
+            fi
           elif [ -f ".output/public/index.html" ]; then
-            echo "path=.output/public" >> "$GITHUB_OUTPUT"
+            OUT=".output/public"
           elif [ -f "build/client/index.html" ]; then
-            echo "path=build/client" >> "$GITHUB_OUTPUT"
+            OUT="build/client"
           else
-            echo "No static index.html found after build."
-            find . -maxdepth 3 -name index.html -print
+            echo "No static output found after build."
+            find . -maxdepth 4 -name index.html -print
+            find dist -maxdepth 3 -type f 2>/dev/null | sort || true
             exit 1
           fi
+
+          echo "path=$OUT" >> "$GITHUB_OUTPUT"
 
       - name: Prepare GitHub Pages artifact
         shell: bash

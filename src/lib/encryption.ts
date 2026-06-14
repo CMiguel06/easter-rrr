@@ -2,8 +2,8 @@
 const enc = new TextEncoder();
 const dec = new TextDecoder();
 
-async function deriveKey(password: string, salt: Uint8Array) {
-  const baseKey = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]);
+async function deriveKey(password: string, salt: BufferSource) {
+  const baseKey = await crypto.subtle.importKey("raw", enc.encode(password) as BufferSource, "PBKDF2", false, ["deriveKey"]);
   return crypto.subtle.deriveKey(
     { name: "PBKDF2", salt, iterations: 150_000, hash: "SHA-256" },
     baseKey,

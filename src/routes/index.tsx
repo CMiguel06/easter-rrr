@@ -17,6 +17,7 @@ import {
 import { GlassCard } from "@/components/ui-custom/GlassCard";
 import { SectionTitle } from "@/components/ui-custom/SectionTitle";
 import { CategoryCard } from "@/components/ui-custom/CategoryCard";
+import { CopyButton } from "@/components/ui-custom/CopyButton";
 import { DifficultyBadge } from "@/components/ui-custom/DifficultyBadge";
 import { CATEGORIES } from "@/lib/tools-data";
 import { findPuzzleTemplate } from "@/lib/puzzle-templates";
@@ -200,6 +201,7 @@ function ThirtySecond() {
           ].map((m) => (
             <button
               key={m.k}
+              type="button"
               onClick={() => setMode(m.k as typeof mode)}
               className={`rounded-full px-3 py-1.5 text-xs ${mode === m.k ? "bg-primary text-primary-foreground" : "border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground"}`}
             >
@@ -210,7 +212,8 @@ function ThirtySecond() {
         <div className="mt-5 break-all rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-xs text-foreground/90">
           {out || <span className="text-muted-foreground">Result appears here…</span>}
         </div>
-        <div className="mt-4 flex justify-end">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <CopyButton value={out} label="Copy output" />
           <Link to="/tools" className="text-xs text-primary hover:text-primary/80">
             Open full toolbox →
           </Link>

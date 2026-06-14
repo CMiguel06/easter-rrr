@@ -118,12 +118,17 @@ function StepCard({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
-    if (canvasRef.current && step.clue)
-      QRCode.toCanvas(canvasRef.current, step.clue, {
-        margin: 2,
-        width: 160,
-        color: { dark: "#e9eaff", light: "#0000" },
-      }).catch(() => {});
+    if (!canvasRef.current) return;
+    if (!step.clue) {
+      const ctx = canvasRef.current.getContext("2d");
+      ctx?.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      return;
+    }
+    QRCode.toCanvas(canvasRef.current, step.clue, {
+      margin: 2,
+      width: 160,
+      color: { dark: "#e9eaff", light: "#0000" },
+    }).catch(() => {});
   }, [step.clue]);
   return (
     <GlassCard className="grid gap-4 p-5 sm:grid-cols-[1fr_auto]">
@@ -132,7 +137,11 @@ function StepCard({
           <span className="text-[11px] uppercase tracking-wider text-muted-foreground">
             Step {index + 1}
           </span>
-          <button onClick={onRemove} className="text-muted-foreground hover:text-rose-300">
+          <button
+            onClick={onRemove}
+            className="text-muted-foreground hover:text-rose-300"
+            aria-label={`Remove QR trail step ${index + 1}`}
+          >
             <Trash2 className="h-3.5 w-3.5" />
           </button>
         </div>

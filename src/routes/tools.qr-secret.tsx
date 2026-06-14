@@ -37,7 +37,13 @@ function QRSecret() {
   const [svg, setSvg] = useState("");
 
   useEffect(() => {
-    if (!canvasRef.current || !content) return;
+    if (!canvasRef.current) return;
+    if (!content) {
+      const ctx = canvasRef.current.getContext("2d");
+      ctx?.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      setSvg("");
+      return;
+    }
     QRCode.toCanvas(canvasRef.current, content, {
       width: size,
       margin,
@@ -50,6 +56,7 @@ function QRSecret() {
   }, [content, size, margin]);
 
   const downloadPNG = () => {
+    if (!content) return toast.error("Add QR content first.");
     if (!canvasRef.current) return;
     canvasRef.current.toBlob((b) => {
       if (!b) return toast.error("Could not export PNG.");
@@ -63,6 +70,7 @@ function QRSecret() {
   };
 
   const downloadSVG = () => {
+    if (!svg) return toast.error("Add QR content first.");
     const blob = new Blob([svg], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");

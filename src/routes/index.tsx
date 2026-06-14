@@ -19,6 +19,7 @@ import { SectionTitle } from "@/components/ui-custom/SectionTitle";
 import { CategoryCard } from "@/components/ui-custom/CategoryCard";
 import { DifficultyBadge } from "@/components/ui-custom/DifficultyBadge";
 import { CATEGORIES } from "@/lib/tools-data";
+import { findPuzzleTemplate } from "@/lib/puzzle-templates";
 import { hashText } from "@/lib/hashing";
 import { encoders } from "@/lib/encoders";
 
@@ -341,9 +342,27 @@ function Workflows() {
 
 function PuzzleStrip() {
   const puzzles = [
-    { title: "Hash Hunt", time: "10 min", diff: "Easy" as const, tool: "Phrase hash" },
-    { title: "Image Whisper", time: "15 min", diff: "Medium" as const, tool: "Image secret" },
-    { title: "QR Trail", time: "20 min", diff: "Medium" as const, tool: "QR trail" },
+    {
+      slug: "hash-hunt",
+      title: "Hash Hunt",
+      time: "10 min",
+      diff: "Easy" as const,
+      tool: "Phrase hash",
+    },
+    {
+      slug: "image-whisper",
+      title: "Image Whisper",
+      time: "15 min",
+      diff: "Medium" as const,
+      tool: "Image secret",
+    },
+    {
+      slug: "qr-trail",
+      title: "QR Trail",
+      time: "20 min",
+      diff: "Medium" as const,
+      tool: "QR trail",
+    },
   ];
   return (
     <section className="mx-auto max-w-6xl pb-24">
@@ -358,7 +377,8 @@ function PuzzleStrip() {
             <h3 className="mt-4 text-[17px] font-semibold tracking-tight">{p.title}</h3>
             <p className="mt-1 text-[12px] text-muted-foreground">Required: {p.tool}</p>
             <Link
-              to="/puzzles"
+              to="/tools/challenge"
+              search={{ template: findPuzzleTemplate(p.slug)?.slug ?? p.slug }}
               className="mt-5 inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80"
             >
               Use template <ArrowRight className="h-3 w-3" />

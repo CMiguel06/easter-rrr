@@ -1,24 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Download, GripVertical, Plus, Upload, X } from "lucide-react";
+import { z } from "zod";
 import { PageHeader } from "@/components/ui-custom/PageHeader";
 import { GlassCard } from "@/components/ui-custom/GlassCard";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui-custom/CopyButton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  findPuzzleTemplate,
+  type ChallengeStep,
+  type ChallengeStepKind,
+} from "@/lib/puzzle-templates";
+
+const challengeSearch = z.object({
+  template: z.string().optional(),
+});
 
 export const Route = createFileRoute("/tools/challenge")({
+  validateSearch: challengeSearch,
   head: () => ({
     meta: [
-      { title: "Create a complete challenge — Easter" },
+      { title: "Create a complete challenge - Easter" },
       {
         name: "description",
         content:
           "Assemble a small treasure hunt by stacking steps, then export it as a local file.",
       },
-      { property: "og:title", content: "Create a complete challenge — Easter" },
+      { property: "og:title", content: "Create a complete challenge - Easter" },
       {
         property: "og:description",
         content: "Build, copy and export multi-step easter egg challenges.",
@@ -28,9 +40,8 @@ export const Route = createFileRoute("/tools/challenge")({
   component: ChallengePage,
 });
 
-type StepKind = "clue" | "base64" | "binary" | "hash" | "image" | "qr" | "reveal";
-
-type Step = { id: string; kind: StepKind; value: string };
+type StepKind = ChallengeStepKind;
+type Step = ChallengeStep;
 
 const STEP_LIB: { kind: StepKind; label: string; placeholder: string; desc: string }[] = [
   {
@@ -77,20 +88,38 @@ const STEP_LIB: { kind: StepKind; label: string; placeholder: string; desc: stri
   },
 ];
 
-function ChallengePage() {
-  const [title, setTitle] = useState("My Easter challenge");
-  const [steps, setSteps] = useState<Step[]>([
+function stepsWithIds(steps: Omit<Step, "id">[]): Step[] {
+  return steps.map((step) => ({ ...step, id: crypto.randomUUID() }));
+}
+
+function blankSteps(): Step[] {
+  return [
     { id: crypto.randomUUID(), kind: "clue", value: "Begin where the day ends." },
     { id: crypto.randomUUID(), kind: "reveal", value: "curiosity rewarded" },
-  ]);
+  ];
+}
+
+function ChallengePage() {
+  const { template: templateSlug } = Route.useSearch();
+  const template = findPuzzleTemplate(templateSlug);
+  const [title, setTitle] = useState(template?.title ?? "My Easter challenge");
+  const [steps, setSteps] = useState<Step[]>(
+    template ? stepsWithIds(template.steps) : blankSteps(),
+  );
   const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!template) return;
+    setTitle(template.title);
+    setSteps(stepsWithIds(template.steps));
+    toast.success(`${template.title} loaded.`);
+  }, [template, templateSlug]);
 
   const add = (kind: StepKind) => {
     const meta = STEP_LIB.find((s) => s.kind === kind)!;
     const reveal = steps.find((s) => s.kind === "reveal");
     const next: Step = { id: crypto.randomUUID(), kind, value: meta.placeholder };
     if (reveal) {
-      // insert before reveal
       setSteps((prev) => {
         const idx = prev.findIndex((s) => s.id === reveal.id);
         const copy = prev.slice();
@@ -152,8 +181,30 @@ function ChallengePage() {
       <PageHeader
         eyebrow="Challenge builder"
         title="Build a small treasure hunt"
-        description="Stack steps to design a multi-step easter egg. Export the plan as a local file — nothing is saved online."
+        description="Stack steps to design a multi-step easter egg. Export the plan as a local file - nothing is saved online."
       />
+      {template && (
+        <GlassCard className="mb-5 flex flex-wrap items-center justify-between gap-3 p-4">
+          <div>
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">
+              Template loaded
+            </div>
+            <div className="text-sm font-medium">{template.title}</div>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            className="border-white/10 bg-white/5"
+            onClick={() => {
+              setTitle("My Easter challenge");
+              setSteps(blankSteps());
+              toast.success("Started a blank challenge.");
+            }}
+          >
+            Start blank
+          </Button>
+        </GlassCard>
+      )}
       <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <div className="space-y-4">
           <GlassCard className="space-y-3 p-5">
@@ -187,7 +238,7 @@ function ChallengePage() {
                       <button
                         onClick={() => move(s.id, -1)}
                         className="text-muted-foreground hover:text-foreground"
-                        aria-label="Up"
+                        aria-label={`Move step ${i + 1} up`}
                       >
                         ▲
                       </button>
@@ -195,7 +246,7 @@ function ChallengePage() {
                       <button
                         onClick={() => move(s.id, 1)}
                         className="text-muted-foreground hover:text-foreground"
-                        aria-label="Down"
+                        aria-label={`Move step ${i + 1} down`}
                       >
                         ▼
                       </button>
@@ -212,7 +263,7 @@ function ChallengePage() {
                           <button
                             onClick={() => remove(s.id)}
                             className="text-muted-foreground hover:text-rose-300"
-                            aria-label="Remove"
+                            aria-label={`Remove step ${i + 1}`}
                           >
                             <X className="h-4 w-4" />
                           </button>
@@ -261,13 +312,47 @@ function ChallengePage() {
         </div>
         <div className="lg:sticky lg:top-24 lg:self-start">
           <GlassCard strong className="space-y-3 p-5">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold">Challenge summary</h3>
-              <CopyButton value={summary} />
-            </div>
-            <pre className="max-h-[60vh] overflow-auto whitespace-pre-wrap rounded-lg bg-black/30 p-4 text-xs leading-relaxed text-foreground">
-              {summary}
-            </pre>
+            <Tabs defaultValue="summary">
+              <div className="flex items-center justify-between gap-3">
+                <TabsList className="grid grid-cols-2 rounded-lg bg-white/5 p-1">
+                  <TabsTrigger value="summary" className="rounded-md text-xs">
+                    Summary
+                  </TabsTrigger>
+                  <TabsTrigger value="player" className="rounded-md text-xs">
+                    Player preview
+                  </TabsTrigger>
+                </TabsList>
+                <CopyButton value={summary} />
+              </div>
+              <TabsContent value="summary" className="mt-3">
+                <pre className="max-h-[60vh] overflow-auto whitespace-pre-wrap rounded-lg bg-black/30 p-4 text-xs leading-relaxed text-foreground">
+                  {summary}
+                </pre>
+              </TabsContent>
+              <TabsContent value="player" className="mt-3">
+                <div className="max-h-[60vh] overflow-auto rounded-lg bg-black/30 p-4">
+                  <div className="text-sm font-semibold">{title}</div>
+                  <div className="mt-3 grid gap-3">
+                    {steps.map((step, index) => {
+                      const meta = STEP_LIB.find((m) => m.kind === step.kind)!;
+                      return (
+                        <div
+                          key={step.id}
+                          className="rounded-lg border border-white/10 bg-white/5 p-3"
+                        >
+                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                            Step {index + 1} - {meta.label}
+                          </div>
+                          <div className="mt-1 whitespace-pre-wrap text-xs text-foreground/90">
+                            {playerPreviewText(step)}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
           </GlassCard>
         </div>
       </div>
@@ -279,9 +364,24 @@ function buildSummary(title: string, steps: Step[]): string {
   const lines = [`# ${title}`, ""];
   steps.forEach((s, i) => {
     const meta = STEP_LIB.find((m) => m.kind === s.kind)!;
-    lines.push(`Step ${i + 1} — ${meta.label}`);
+    lines.push(`Step ${i + 1} - ${meta.label}`);
     lines.push(`  ${s.value}`);
     lines.push("");
   });
   return lines.join("\n");
+}
+
+function playerPreviewText(step: Step) {
+  if (step.kind === "base64") return `Decode this Base64 clue: ${btoa(step.value)}`;
+  if (step.kind === "binary") {
+    const encoded = Array.from(new TextEncoder().encode(step.value))
+      .map((b) => b.toString(2).padStart(8, "0"))
+      .join(" ");
+    return `Decode this binary clue: ${encoded}`;
+  }
+  if (step.kind === "hash") return `Find the phrase that matches this answer clue: ${step.value}`;
+  if (step.kind === "image") return `Prepare an image secret containing: ${step.value}`;
+  if (step.kind === "qr") return `Create a QR code containing: ${step.value}`;
+  if (step.kind === "reveal") return `Final reveal: ${step.value}`;
+  return step.value;
 }

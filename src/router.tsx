@@ -4,13 +4,21 @@ import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
   const queryClient = new QueryClient();
+  const basepath = import.meta.env.BASE_URL === "/" ? undefined : import.meta.env.BASE_URL.replace(/\/$/, "");
 
   const router = createRouter({
     routeTree,
     context: { queryClient },
+    basepath,
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
   });
 
   return router;
 };
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: ReturnType<typeof getRouter>;
+  }
+}
